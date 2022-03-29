@@ -1,0 +1,301 @@
+---
+products:
+    new:
+        limit: {{theme_settings.homepage_new_products_count}}
+    featured:
+        limit: 100
+    top_sellers:
+        limit: {{theme_settings.homepage_top_products_count}}
+carousel: {{theme_settings.homepage_show_carousel}}
+blog:
+    recent_posts:
+        limit: 2
+        summary: 200
+
+---
+{{#partial "hero"}}
+    
+{{/partial}}
+
+{{#partial "page"}}
+{{#each shipping_messages}}
+     {{> components/common/alert-info message}}
+{{/each}}
+
+<style>
+   /* .body.home{
+	   overflow-x:hidden;
+	   position:relative;
+   } */
+   
+      a.tab-title{
+	    outline:0 !important;
+      }
+    .maincontainer-compare{
+	    display:none;
+    }
+    .main .home{
+	    margin-bottom:0 !important;
+    }
+    .value-proposition{
+	    margin-top:0;
+    }
+    .newsletter-home-section{
+	    padding-top:0;
+    }
+    
+    .list-action-container{
+        display:flex;
+        justify-content: center;
+        flex-direction: column;
+        height:187px;
+    }
+    .listItem-details{
+	    height:147px;
+    }
+     /* adjust the size of banner */
+    .static-pomotion-absolute .banner,.static-promotion-absolute .banner .featured-categories-banner, .featured-categories-banner p, .featured-categories-banner img{
+	    height:100%;
+    }
+    .featured-categories-banner p{
+	    margin:0;
+    }
+</style>
+
+
+<div class="main full">
+    {{> components/page/home/header-banner-slick}}
+    {{> components/page/home/badge-feature}}
+
+    <div class="static-banner pt-3">
+	<div class="w-100 d-flex col">
+		<a href="/lg-promotion" class="pr-3">
+			<img src="{{cdn 'https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/lg-promotion-banner-washtower.png?t=1634190585&_gl=1*1uigz9a*_ga*NjI0NTc5OTk1LjE2MTgyMTQ3OTI.*_ga_WS2VZYPC6G*MTYzNDE4Nzc3Ni4yMDkuMS4xNjM0MTkwMDAzLjUx'}}" class="lazyload" alt="">
+		</a>
+		<a href="/lg-2-promotion" class="pl-3">
+			<img src="{{cdn 'https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/lg-promotion-banner-appliances.png?t=1634192012&_gl=1*r3z9r7*_ga*NjI0NTc5OTk1LjE2MTgyMTQ3OTI.*_ga_WS2VZYPC6G*MTYzNDE4Nzc3Ni4yMDkuMS4xNjM0MTkyMDE0LjYw'}}" class="lazyload" alt="">
+		</a>
+	</div>
+    </div>
+    <div class="static-banner pt-3">
+	<div class="w-100 d-flex col">
+		<a href="/beko-2-promotion" class="pr-3">
+			<img src="{{cdn 'https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/beko-appliances-800.png?t=1634607583&_gl=1*ooabp5*_ga*NjI0NTc5OTk1LjE2MTgyMTQ3OTI.*_ga_WS2VZYPC6G*MTYzNDYwNjcyNi4yMjMuMS4xNjM0NjA3MjYyLjYw'}}" class="lazyload" alt="">
+		</a>
+		<a href="/beko-promotion" class="pl-3">
+			<img src="{{cdn 'https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/beko-dishwashers-800.png?t=1634607441&_gl=1*ooabp5*_ga*NjI0NTc5OTk1LjE2MTgyMTQ3OTI.*_ga_WS2VZYPC6G*MTYzNDYwNjcyNi4yMjMuMS4xNjM0NjA3MjYyLjYw'}}" class="lazyload" alt="">
+		</a>
+	</div>
+    </div>
+    <div class="static-banner pt-3">
+	<div class="w-100 d-flex col">
+		<a href="/whirlpool-promotion" class="pr-3">
+			<img src="{{cdn 'https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/whirlpool-promotion-banner-appliances.png?t=1634192964&_gl=1*dibo5*_ga*NjI0NTc5OTk1LjE2MTgyMTQ3OTI.*_ga_WS2VZYPC6G*MTYzNDE4Nzc3Ni4yMDkuMS4xNjM0MTkyMzEzLjQ2'}}" class="lazyload" alt="">
+		</a>
+		<a href="/samsung-promotion" class="pl-3">
+			<img src="{{cdn 'https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/samsung-promotion-banner.png?t=1634179797&_gl=1*1v5mts9*_ga*NjI0NTc5OTk1LjE2MTgyMTQ3OTI.*_ga_WS2VZYPC6G*MTYzNDE3OTUwNS4yMDcuMS4xNjM0MTc5NzY4LjU3'}}" class="lazyload" alt="">
+		</a>
+	</div>
+    </div>
+
+{{> components/page/home/popular-product-tabs}}
+
+{{> components/page/home/promotion}}
+
+{{> components/page/home/blogs}}
+
+
+   
+</div>
+
+<!-- POP SIGNUP DEC 12 2021-->
+
+<div class="popup-online-only">
+	<div class="content-online-only">
+		<div class="close-button"><i class="fa fa-times"></i></div>
+		<span class="online-only-promo">ONLINE ONLY PROMO</span>
+		<span class="sign-up-and">SIGN UP AND</span>
+		<span class="get-25-off">GET $25 OFF</span>
+		<p class="online-blurb">Be the first to know about our latest deals, sales, and<br>
+			exclusive offers and receive a $25 discount.
+		</p>
+		<div class="online-small-blurb-div">
+			<li class="online-small-blurb">$25 off on select items with your next online purchase</li>
+			<li class="online-small-blurb">Exclusive offers and deals</li>
+			<li class="online-small-blurb">Latest industry news, tips, and trends</li>
+			<li class="online-small-blurb">New blog every month</li>
+		</div>
+		<a href="/subscription-discount" class="online-subscribe">I WANT TO SUBSCRIBE!</a>
+		<p class="online-small-blurbs-footer">
+			This offer can be combined with other offers such as <a href="/landing-page">King's Black Friday Held-Over sale!</a>
+			</a>
+		</p>
+	</div>
+</div>
+<script>
+	$('.content-online-only .close-button').click(function(){
+		$('.popup-online-only').css('display','none');
+	});
+	
+	
+    /*	
+	if(localStorage.getItem('popState') != 'shown'){
+	$(".popup-online-only").css('display','flex');
+	localStorage.setItem('popState','shown')
+	}
+	*/
+</script>
+<!-- end POPUP -->
+<script type="text/javascript">
+
+		var $animation_elements = $('.animation-element');
+		var $window = $(window);
+
+		function check_if_in_view() {
+		  var window_height = $window.height();
+		  var window_top_position = $window.scrollTop();
+		  var window_bottom_position = (window_top_position + window_height);
+		 
+		  $.each($animation_elements, function() {
+			var $element = $(this);
+			var element_height = $element.outerHeight();
+			var element_top_position = $element.offset().top;
+			var element_bottom_position = (element_top_position + element_height);
+		 
+			//check to see if this current container is within viewport
+			if ((element_bottom_position >= window_top_position) &&
+				((element_top_position+60) <= window_bottom_position)) {
+			  $element.addClass('in-view');
+			} else {
+//			  $element.removeClass('in-view');
+			}
+		  });
+		}
+
+		$window.on('scroll resize', check_if_in_view);
+		$window.trigger('scroll');
+
+$(document).ready(function() {
+
+	$('body').append('<div class="popup-container" style="bottom:6%;cursor:pointer;z-index:99999">'+
+		'<div class="pop">'+
+			'<img class="lazyload" src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/popup-question-mark-icon.png?t=1632885982&_gl=1*mjue79*_ga*NjI0NTc5OTk1LjE2MTgyMTQ3OTI.*_ga_WS2VZYPC6G*MTYzMjg4NTkzMi4xNDYuMS4xNjMyODg1OTg1Ljc." alt="">'+
+			'<div class="pop-blurb">'+
+				'<p>MISSING SOME ITEMS?</p>'+
+				'<span>Learn more about the effects of COVID-19 on our supplies here.</span>'+
+			'</div>'+
+		'</div>'+
+		'<div class="close">x</div>'+
+	'</div>');
+
+
+	$('.pop').on('click',function(){
+		$('#covid101').css('display','block');
+	});
+
+
+
+
+
+
+	var stickyname = '.header-bottom';
+	if($(stickyname).length > 0){
+		var stickyNavTop = $(stickyname).offset().top;
+		var stickyNav = function(){
+		var scrollTop = $(window).scrollTop(); 
+		if (scrollTop > stickyNavTop) { 
+			$(stickyname).addClass('sticky');
+		} else {
+			$(stickyname).removeClass('sticky'); 
+		}
+		}
+		stickyNav();
+		$(window).scroll(function() {
+			stickyNav();
+		});
+	}
+
+
+//  animate the popup 
+  setTimeout(function(){
+	  var l = $('.body').width();
+	var left = l - 505;
+	if(l < 400){
+		left = -72;
+		console.log(true);
+	}
+	$('.popup-container').animate({left: left+'px'});
+	$('#tidio-chat-iframe').animate({paddingLeft:'100%'});
+	$('#tidio-chat-iframe').animate({paddingLeft:'100%'});
+	$('#tidio-chat-iframe').css('z-index','0');
+
+	
+	setTimeout(function(){
+		$('.popup-container').animate({left:'100%',opacity:'0'});
+		$('#tidio-chat-iframe').animate({paddingLeft:'0'});
+		$('#tidio-chat-iframe').css('z-index','99');
+	},10000);
+
+
+  },2800);
+
+
+  $('.popup-container').find('.close').click(function(){
+	$(this).parent().animate({left:'100%',opacity:'0'});
+  });
+
+
+});
+</script>
+<script>
+	$(document).ready(function() {
+	   // Slick Init
+        // $('.slick-banner').slick({dots:true,infinite:true,speed:300,fade:true,cssEase:'linear'});
+	});
+</script>
+
+<script src ="https://form.jotform.com/static/feedback2.js" type="text/javascript"></script><script type="text/javascript">
+	// let product = '';
+	// let model = '';
+       
+	// $('.btn-ask').on('click',function(){
+       
+	//    product = $(this).attr('product-name');
+	//    model = $(this).attr('model');
+       
+	
+       
+	// });
+	// for category jotform 
+       //remove the attribute and add it again to refresh the element everytime the jotform was close
+	  $('.btn-ask').on('click',function(){
+	    $('.btn-ask').removeAttr('requested');
+	    $(this).attr('requested','');
+	  });
+       
+       
+	//get the value of button and give it to jotform after click before closing the jotform.
+	var jotform = new JotformFeedback({
+	formId: '201911524199051',
+	base: 'https://form.jotform.com/',
+	windowTitle: 'Request Quotation',
+	background: '#d22229',
+	fontColor: '#FFFFFF',
+	type: '0',
+	iframeParameters:
+	{
+	  'productDetails' : function(){
+	      return $('[requested]').attr('product_name');
+	  },
+	  'Model_No'  : function(){
+	      return $('[requested]').attr('model');
+	  }
+	},
+	height: 600,
+	width: 600,
+	openOnLoad: false
+	});
+		
+       </script>
+       {{/partial}}
+       {{> layout/home-base}}

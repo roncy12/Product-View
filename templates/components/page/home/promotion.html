@@ -1,0 +1,192 @@
+<div class="promotion-container">
+        <h1 class="title">Promotions</h1>
+    
+<div class="product-promotion-container d-flex w-100">
+    <div class="col-promotion">
+              <div class="bprice">
+               <span class="title">
+                       KING'S GREAT BUYS PLUS
+                 </span>
+                 <span class="title-footer">
+                       EVANSVILLE &bullet; OWENSBORO
+                 </span>
+              </div>
+              <img class='gfcard' src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/gf-card.png?t=1641276153" class="lazyload" alt="">
+              <p class="ribbon-footer-blurb">
+                     VALID ON ANY FURNITURE OR BEDDING PURCHASE AT KING'S EVANSVILLE AND OWENSBORO BRANCHES. 
+              </p>
+              <a href="/locations" class="lrnmore">LEARN MORE</a>
+              <div class="bg-promotion">
+                       <img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/gfcard.png?t=1641282009" alt="" class="lazyload">
+               </div>
+    </div>   
+    <div class="col-promotion">
+               <div class="bprice">
+                       <img class="bestprice" src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/bestprice.png?t=1641283169" alt="" class="lazyload">
+               </div>
+               <img class="gfcard" src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/dlguarantee.png?t=1641283415" alt="" class="lazyload">
+               <p class="ribbon-footer-blurb">
+                       ENJOY THE GREATEST DEALS WITH KING'S DEAL MATCH GUARANTEE!
+               </p>
+               <a href="/deal-match" class="lrnmore">LEARN MORE</a>
+               <div class="bg-promotion">
+                 <img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/dealmatch-promotion.png?t=1641283087" alt="" class="lazyload">   
+            </div>
+    </div>   
+    <div class="col-promotion">
+       <div class="bprice">
+               <img class="bestprice" src=https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/upper-online-only-tab.png?t=1641285114" alt="" class="lazyload">
+       </div>
+       <img class="gfcard" src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/oi-ribbon.png?t=1641285183" alt="" class="lazyload">
+       <p class="ribbon-footer-blurb">
+             GET ACCESS TO DISCOUNTS AND PROMOS WHEN YOU SHOP WITH US ONLINE!
+       </p>
+       <a href="/online-only-deals" class="lrnmore">LEARN MORE</a>
+       <div class="bg-promotion">
+         <img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/online-only-bg.png?t=1641285025" alt="" class="lazyload">   
+    </div>
+</div>  
+</div>
+</div>
+<style>
+       .bprice{
+               width:100%;
+               text-align: center;
+               max-height:103px;
+               height:100%;
+       }
+       .gfcard{
+               width: 75%;
+               margin: 0 auto;
+               margin-top: 20px;
+       }
+       .bestprice{
+               height:100%;
+       }
+       .bg-promotion{
+               position:absolute;
+               top:0;
+               left:0;
+               width: 100%;
+               height:100%;
+               z-index: -1;
+
+       }
+       .bg-promotion img{
+              width:100%;
+       }
+       .col-promotion{
+               padding-top:40px;
+              width:calc(100% / 3); 
+              display:flex;
+              flex-direction: column;
+              position:relative;
+              height:570px;
+       }
+       .col-promotion .title,.col-promotion .title-footer{
+               text-align:center;
+               display:block;
+       }
+       .col-promotion .title{
+               margin-top:40px;
+               font-size:26px;
+               font-weight: 900; 
+               font-family: sans-serif;
+       }
+       .col-promotion .title-footer{
+               font-size:16px;
+               font-weight: 600;
+               font-family: sans-serif;
+       }
+       .ribbon-footer-blurb{
+               font-size:7pt;
+               width:60%;
+               margin:0 auto;
+               text-align: center;
+               margin-top:10px;
+       }
+       .promotion-ribbon{
+               display:flex;
+               align-items: center;
+               justify-content: center;
+       }
+       a.lrnmore{
+               color: red;
+               padding: 5px;
+               border: 1px solid red;
+               width: 212px;
+               text-align: center;
+               text-decoration: none;
+               display: block;
+               font-size: 12px;
+               margin: 0 auto;
+               font-weight: 700;
+               margin-top: 10px;
+               transition: all .4s;
+       }
+       .product-promotion-container{
+               height:34vw;
+       }
+       a.lrnmore:hover{
+       background-color: #d22229;
+       color: #fff;
+       }
+
+       @media(max-width:1148px){
+               .col-promotion .title{
+                       font-size:22px;
+               }
+       }
+       @media(max-width:1400px){
+               .bg-promotion img{
+                       height: 41vw;
+               }
+       }
+       @media(max-width:1256px){
+               .product-promotion-container{
+                       height:37vw;
+               }
+               .bg-promotion img{
+                       height: 44vw;
+               }
+       }
+       @media(max-width:819px){
+               .product-promotion-container{
+                       height:242vw;
+                       flex-direction: column;
+               }
+               .col-promotion{
+                       width:100%;
+                       height:100%;
+               }
+               .bg-promotion img{
+                       width:100%;
+               }
+               .bestprice{
+                       height:100%;
+                       width:unset;
+               }
+               .bg-promotion img{
+                       height:82vw;
+               }
+             .header-blog{
+                     margin-top:0 !important;
+             }
+       }
+       @media(max-width:680px){
+               .product-promotion-container{
+                       height:300vw;
+               }
+               .bg-promotion img{
+                       height:100vw;
+               }
+       }
+       @media(max-width:550px){
+               .product-promotion-container{
+                     height: 335vw;  
+               }
+               .bg-promotion img{
+                       height:112vw;
+               }
+       }
+</style>

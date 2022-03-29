@@ -1,0 +1,26 @@
+<div class="blog-container">
+         <div class="header-blog">
+                  <h1>Our latest blogs</h1>
+                  <p class="blurb"></p>
+         </div>
+         <div class="blog-content">
+              {{#each blog.recent_posts}}
+                          <div class="col">
+                                    {{> components/common/responsive-img
+                                    image=thumbnail
+                                    otherAttributes="height='340' width='100%'"
+                                    lazyload=theme_settings.lazyload_mode
+                                    }}
+                                    <div class="blurb-content">
+                                             <h1>{{title}}</h1>
+                                             <p class="blurb blurb-mobile">{{summary}}...</p>
+                                             <a href="{{url}}" class="blurb blurb-mobile">Read more</a>
+                                    </div>
+                          </div>
+                         <div class="blog-mobile">
+                              <p class="blurb">{{summary}}...</p>
+                              <a href="{{url}}" class="blurb">Read more</a>
+                         </div>
+              {{/each}}
+         </div>
+</div>

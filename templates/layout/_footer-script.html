@@ -1,0 +1,40 @@
+		<button onclick="topFunction()" id="myBtn" title="Go to top">
+			<span class="material-icons">arrow_upward</span>
+		</button>
+
+		<script>// When the user scrolls down 20px from the top of the document, show the button
+		window.onscroll = function() {
+		  scrollFunction()
+		};
+					
+		var navbar = document.getElementById("stick-navbar");
+		var sticky = navbar.offsetTop;
+					
+		function scrollFunction() {
+		  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+			document.getElementById("myBtn").style.display = "block";
+			navbar.classList.add("sticky")
+		  } else {
+			document.getElementById("myBtn").style.display = "none";
+			navbar.classList.remove("sticky");
+		  }
+		}
+
+		// When the user clicks on the button, scroll to the top of the document
+		function topFunction() {
+		  document.body.scrollTop = 0;
+		  document.documentElement.scrollTop = 0;
+		}
+		</script>
+
+
+        <script>window.__webpack_public_path__ = "{{cdn 'assets/dist/'}}";</script>
+        <script src="{{cdn 'assets/dist/theme-bundle.main.js'}}"></script>
+        <script>
+            {{!-- Exported in app.js --}}
+            window.stencilBootstrap("{{page_type}}", {{jsContext}}).load();
+        </script>
+        
+
+
+        {{{footer.scripts}}}

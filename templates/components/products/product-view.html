@@ -1,0 +1,1238 @@
+<script> 
+	$(document).ready(function(){
+	  $(".finance-btn").click(function(){
+	    $("#financing-overlay").show(500);
+	  });
+	  $("#financing-overlay").click(function(){
+	    $("#financing-overlay").hide(500);
+	  });
+	  $(".shipping-btn").click(function(){
+	    $("#shipping-overlay").show(500);
+	  });
+	  $("#shipping-overlay").click(function(){
+	    $("#shipping-overlay").hide(500);
+	  });
+	//     $(".ask-for-price-overlay").click(function(){
+	//     $("#ask-for-price-overlay").show(500);
+	//   });
+	  $(".ask-for-price-exit").click(function(){
+	    $("#ask-for-price-overlay").hide(500);
+	  });
+	});
+</script> 
+<style>
+	.productview-images-custom .productView-image{
+		border:none;
+	}
+	#wishlist-dropdown.is-open{
+	    left:0 !important;
+	}
+	#flix-minisite img{
+	    width:80px;
+	}
+	.productview-images-custom{
+		width:100%;
+		margin:0;
+		padding:0;
+	}
+	.productView-options .form-action{
+		width:100% !important;
+		padding: 0 3% !important;
+	}
+	
+	.store-deal-container .avail {
+		background-color: #004eaa;
+		width: 140px;
+	}
+
+	.store-deal-container .avail:before {
+		background-color: #004eaa;
+	}
+
+	.store-deal-container .avail:after {
+		background-color: #004eaa;
+	}
+	/* Bedding Description */
+	.details-styling.bedding-styling {
+		padding: 3rem 0 0;
+	}
+	.flex-specs {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		margin-top: 4rem;
+		padding: 3rem 5rem 5rem;
+	}
+	p.float-left {
+		width: 45%;
+	}
+	ol.float-right {
+		width: 45%;
+		margin: 2.5rem;
+		margin-left: auto;
+	}
+	ol.float-right li {
+		padding:0 0 0.5rem 0.5rem;
+	}
+	ol.float-right li::marker {
+		color: #333;
+		font-size: 15px;
+		font-weight: bolder;
+	}
+	.grid-features .grid-div p img{
+		filter: invert(100%);
+		max-width: 169px;
+	}
+	@media screen and (max-width: 819px) {
+		.flex-specs {
+			flex-direction: column;
+		}
+		ol.float-right {
+			width: auto;
+		}
+	}
+</style>
+<div class="productView" {{#if settings.data_tag_enabled}} data-event-type="product" data-entity-id="{{product.id}}" data-name="{{product.title}}" data-product-category="{{#each product.category}}{{#if @last}}{{this}}{{else}}{{this}}, {{/if}}{{/each}}" data-product-brand="{{product.brand.name}}" data-product-price="{{#if product.price.with_tax}}{{product.price.with_tax.value}}{{else}}{{product.price.without_tax.value}}{{/if}}" data-product-variant="single-product-option"{{/if}}>
+	<div class="rev">
+		<section class="col-prod productview-images-custom" data-image-gallery>
+				{{!--
+				Note that these image sizes are coupled to image sizes used in /assets/js/theme/common/product-details.js
+				for variant/rule image replacement
+				--}}
+			<div class="imgcontainer-productpage" style="border: 1px solid #cccccc;">
+				<div style="text-align:center;margin-top:2%;">
+					{{#if product.brand}}
+					<img class="cardlogoimage {{sku}} lazyload " src="{{cdn (concat 'https://kingsgreatbuys.com/product_images/uploaded_images/' (concat (toLowerCase (dashcase product.brand.name))'.jpg'))}}" >
+					{{/if}}
+				</div>
+				<div class="product-image" style="position:relative">
+					<figure class="productView-image"
+					data-image-gallery-main
+					{{#if product.main_image}}
+					data-zoom-image="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size }}"
+					{{/if}}
+					>
+						<div class="productView-img-container">
+							{{!-- Remove the surrounding a-element if there is no main image. --}}
+							{{#if product.main_image}}
+							<a href="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size}}"
+							target="_blank"{{#if schema}} itemprop="image"{{/if}}>
+							{{/if}}
+							{{> components/common/responsive-img
+							image=product.main_image
+							class="productView-image--default"
+							fallback_size=theme_settings.product_size
+							lazyload=theme_settings.lazyload_mode
+							default_image=theme_settings.default_image_product
+							otherAttributes="data-main-image"
+							}}
+							{{!-- Remove the surrounding a-element if there is no main image. --}}
+							{{#if product.main_image}}
+							</a>
+							{{/if}}
+						</div>
+					</figure>
+				
+				</div>
+			</div>
+				
+			<!-- thumnail button scroll y -->
+			<div style="position:relative;">
+		
+				<ul class="productView-thumbnails"  style="width:100% !important;">
+					<div data-slick='{
+					"infinite": false,
+					"mobileFirst": true,
+					"dots": false,
+					"accessibility": false,
+					"slidesToShow": 4,
+					"slidesToScroll": 4
+					}'>
+						{{#each product.images}}
+							<li>
+								<a
+									class="productView-thumbnail"
+									href="{{getImage product.main_image 'product_size' (cdn theme_settings.default_image_product)}}"
+									data-image-gallery-item
+									data-image-gallery-new-image-url="{{getImage product.main_image 'product_size' (cdn theme_settings.default_image_product)}}"
+									data-image-gallery-new-image-srcset="{{getImageSrcset this use_default_sizes=true}}"
+									data-image-gallery-zoom-image-url="{{getImage product.main_image 'product_size' (cdn theme_settings.default_image_product)}}"
+									>
+									{{> components/common/responsive-img
+									image=this
+									fallback_size=../theme_settings.productview_thumb_size
+									lazyload=../theme_settings.lazyload_mode
+									}}
+								</a>
+							</li>
+						{{/each}}
+					</div>
+				</ul>
+		
+			</div>
+			
+			<script>
+				(function($) {
+				$(document).ready(function () {
+				//SLIDE UP
+				//from Jquery("#arrowup") to $("#arrowup")
+				$("#arrowup").on("click", function () {
+				var $ul = $('#inline_navigation');
+				var y = $ul.scrollTop();
+				var $firstChild = $ul.children().first();
+				var step = $firstChild.outerHeight() + parseInt($firstChild.css('marginBottom'),10);
+				
+				console.log('before up', y, step);
+				if (y >= 0) {
+				y -= step;
+				console.log('after up', y);
+				
+				$ul.stop().animate({
+					scrollTop: y
+				}, 100);
+				}
+				});
+				//SLIDE DOWN
+				$("#arrowdown").on("click", function () {
+				var $ul = $('#inline_navigation');
+				var y = $ul.scrollTop();
+				var h = $ul.height();
+				var $firstChild = $ul.children().first();
+				var step = $firstChild.outerHeight() + parseInt($firstChild.css('marginBottom'),10);
+				
+				console.log('before down', y, step);
+				if (h >= y) {
+				y += step;
+				console.log('after down', y);
+				
+				$ul.stop().animate({
+					scrollTop: y
+				}, 100);
+				}
+				});
+				});
+				}(jQuery));
+			</script>
+		</section>
+		<section class="col-prod productview-description-custom">
+			<div class="product-description-container">
+				<h1 class="productView-title bottom-space-10" {{#if schema}}itemprop="name"{{/if}}>{{product.title}}</h1>
+				<p id="brandmodel" class="bottom-space-10">
+					<strong style="color:#757575;">Brand: {{product.brand.name}}</strong><strong id="model-sku" style="color:#757575;margin-left:21%;padding-left:1%">Model No.: {{product.sku}}</strong></p>
+				<div  class="stamp-container bottom-space-10" style="display:flex;align-items: center;justify-content: unset;">
+					<div style="margin-bottom:0;">
+						<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+					</div>
+					<span id="label_reviews" style="margin-left:7%;">
+						(No ratings yet)
+					</span>
+				</div>
+				{{product.detail_messages}}
+				<!--
+				<div class="color-option-container">
+					<span class="title">Other Color(s)</span>
+					<div class="option-container-flex">
+							{{#each product.related_products}}
+								{{#inArray (pluck custom_fields 'name') 'Color'}}
+
+									<div class="prod-opt">
+										<a href="{{url}}" class="product-href">
+											<div class="prod-image-container">
+												{{> components/common/responsive-img
+													image=image
+													fallback_size=../theme_settings.productview_thumb_size
+													lazyload=../theme_settings.lazyload_mode
+												}}
+											</div>
+											<div class="prod-desc-container">
+												{{#each custom_fields}}
+													{{#if name '==' "Color"}}
+													<p class="color">{{value}}</p>
+													{{/if}}
+												{{/each}}
+												<p class="option-sku">{{sku}}</p>
+												<p class="option-price">{{price.sale_price_without_tax.formatted}}</p>
+												
+											</div>
+										</a>
+									</div>									
+								{{/inArray}}
+							{{/each}}
+
+					</div>
+				</div>		
+				-->
+				<div class="product-features top-space-20" style="border-bottom: 1px solid #cacaca;padding-bottom:10px;">
+					{{#eachIndex (split product.description '<!-- split -->')}}
+					{{#if index '==' '3' }} 
+					<!-- {{{item}}}<span class="read-more-product-page">more features</span>-->
+					{{{item}}}
+					{{/if}}
+					{{/eachIndex}}
+				</div>
+				<div class="productview-quick-specs">
+					<h4 class="top-space-20 bottom-space-20">Quick specs:</h4>
+					<ul>
+						{{#each categories}}
+								{{#if is_active}}
+									{{assignVar "base" name}}
+								{{/if}}		
+						{{/each}}
+
+						{{#unless (getVar "base") '==' 'Bedding'}}
+
+						<li class="bottom-space-20"><strong>Type:</strong> {{#each categories}}
+								{{#if is_active}}
+								{{assignVar "base" name}}
+									{{#each children}}
+									{{#if is_active}}
+										 {{name}}
+									{{/if}}
+									{{/each}}
+								{{/if}}		
+							{{/each}}
+						</li>
+						{{/unless}}
+					
+
+					</ul>
+					<ul class="bedding-products">
+						{{#if product.custom_fields}}
+
+						{{else}}
+							<style>
+									.productview-quick-specs h4 {
+										display: none;
+									}
+							</style>
+						{{/if}}
+						{{#if settings.data_tag_enabled}}
+							{{#contains product.category "Bedding"}}
+								{{#each (limit product.custom_fields 4)}}
+								<li class="bottom-space-20"><strong>{{name}}:</strong>	{{value}}</li>
+								{{/each}}
+							{{/contains}}
+						{{else}}
+							{{#contains product.category "Bedding"}}
+								{{#each (limit product.custom_fields 4)}}
+								<li class="bottom-space-20"><strong>{{name}}:</strong>	{{value}}</li>
+								{{/each}}
+							{{/contains}}
+						{{/if}}
+						{{#contains product.category "Bedding"}}
+							{{#each (limit product.custom_fields 4)}}
+							<li class="bottom-space-20"><strong>{{name}}:</strong>	{{value}}</li>
+							{{/each}}
+						{{/contains}}
+					</ul>
+
+					<div id="flix-minisite"></div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<section class="col-prod productview-details-custom" style="width:35%; padding-left:2%;">
+		<div style="border:1px solid #dadada;background-color:#f7f7f7;position:relative;">
+			<div class="store-deal-container">
+				{{#if product.stock_level}}
+				   {{#gt product.stock_level 4}}
+					   <div class="red-ribbon in-stock">In Stock</div>
+				   {{/gt}} 
+				   {{#if product.stock_level ">=" "2"}}
+						{{#lte product.stock_level 4}}
+						   <div class="red-ribbon available-to-order">Low Stock</div>
+					   {{/lte}}
+				   {{/if}}
+				   	{{#lte product.stock_level 1}}
+						<div class="red-ribbon on-order">Out of Stock</div>
+					{{/lte}}
+				{{else}}
+					<div class="red-ribbon on-order">Out of Stock</div>
+				{{/if}}
+				
+				<div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">
+					<label class="form-label form-label--alternate">
+						<!-- {{lang 'products.current_stock'}} -->
+						<span data-product-stock style="display: none;"> </span>
+			
+					</label>
+				</div>
+		   </div>
+			<div class="d-none" style="display: none;">
+				{{#each product.custom_fields}}
+						{{#if name '===' 'Inv Flag'}}
+						<div class="store-deal-container">
+							<div class="red-ribbon {{lowercase (dashcase value)}}">{{value}}</div>
+						</div>
+						{{else}}
+							{{#if name '===' 'In-Store Deal'}}
+								<div class="store-deal-container">
+									<div class="red-ribbon in-store-deal">In-Store Deal</div>
+								</div>
+							{{/if}}
+						{{/if}}
+							
+				{{/each}}
+			</div>
+			<div class="productView-product">
+				<div class="product-badge" style="padding-top:14%">
+					<a href="/deal-match"class="deal-match fl">
+						
+							<img src="{{cdn 'img/badges/deal-match-icon.png'}}" alt="">
+							<span>Deal Match<br>Guarantee</span>
+						
+					</a>
+					{{#inArray product.category "Delivery Express"}}
+					<a href="/delivery-express"class="deal-match">
+						<img src="{{cdn 'img/badges/delivery-express-icon.png'}}" alt="">
+						<span>Delivery<br>Express</span>
+					</a>
+					{{/inArray}}
+					<div class="apply-financing fl">
+						<div class="financing-div finance-btn" style="cursor:pointer">
+							<img src="{{cdn 'img/badges/apply-for-financing-icon.png'}}" alt="">
+							<span>Apply for<br style="display:block !important;">Financing</span>
+						</div>
+					</div>
+					{{#any (if product.price.without_tax.value '>=' '999999')}}
+					{{else}}
+					{{#gt product.stock_level 10000}}
+						<div style="width:100%;display:block;position: relative;text-align: center;margin-top:5px;" class="fl">
+							<span style="color:red;font-size:16px;font-style:italic;">
+							    <strong>Call us for estimated delivery date</strong>
+							</span>
+						</div>	
+					{{/gt}}
+					{{/any}}
+					
+				</div>
+				
+			<!--
+				{{#if product.brand}}
+				
+				<img class="cardlogoimage" src="{{cdn 'img/brands/Whirlpool.png'}}" onload="this.onload=null; this.src=imgRender('{{product.brand.name}}');" />
+				{{/if}}
+				<script>
+				function imgRender(brand){
+				var img_src =  "{{cdn 'img/Whirlpool.png'}}";
+				return img_src.replace('Whirlpool', brand);
+				}
+				</script>
+				-->
+	{{#any (if product.price.without_tax.value '>=' '999999')}}
+			<script src ="https://form.jotform.com/static/feedback2.js" type="text/javascript"></script><script type="text/javascript">
+				var JFL_201911524199051 = new JotformFeedback({
+				formId: '201911524199051',
+				base: 'https://form.jotform.com/',
+				windowTitle: 'Request Quotation',
+				background: '#d22229',
+				fontColor: '#FFFFFF',
+				type: '0',
+				iframeParameters:
+				{
+				'productDetails' : function(){
+				return $('#product_ask').attr('product_name');
+				},
+				'Model_No'  : function(){
+				return $('#product_ask').attr('model');
+				}
+				},
+				height: 600,
+				width: 600,
+				openOnLoad: false
+				});
+			</script>
+			<a id="product_ask" class="btn lightbox-201911524199051 button button--small" style="margin-top: 16px;width:94%;margin-bottom:5px;" product_name="{{product.title}}" model="{{product.sku}}">
+				ASK FOR PRICE
+			</a>
+			{{> components/common/wishlist-dropdown}}
+			<div style="margin-bottom:2%"></div>
+			<!--<a class="ask-for-price-overlay">ASK FOR PRICE</a>-->
+			
+	{{else}}
+		{{#gt product.stock_level 10000}}
+			<div class="productview-price">
+				{{#if product.call_for_price}}
+				<p class="productView-price">
+					<span>{{product.call_for_price}}</span>
+				</p>
+				{{/if}}
+				<div class="productView-price">
+					{{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+					{{> components/products/price price=product.price schema_org=schema}}
+					{{else}}
+					{{> components/common/login-for-pricing}}
+					{{/or}}
+				</div>
+				{{{region name="product_below_price"}}}
+			</div>
+			
+			{{#each product.custom_fields}}
+			{{#if name '===' 'Rebate IDs'}}
+			{{#if value '===' '0'}}
+			{{else}}
+			<div style="display:flex;justify-content: space-between;padding-left:3%;padding-right:3%">
+			        <span style="color:red">Rebate Available: </span>
+			        <span  id="rebate_details" style="color:rgb(97, 97, 97);text-decoration: underline;cursor: pointer;">See details</span>
+			</div>
+			{{/if}}
+			{{/if}}
+			{{/each}}
+			
+			<div class="productView-options">
+			{{#if product.release_date }}
+			<p>{{product.release_date}}</p>
+			{{/if}}
+			<form class="form" method="post" action="{{product.cart_url}}" enctype="multipart/form-data"
+				data-cart-item-add>
+				<input type="hidden" name="action" value="add">
+				<input type="hidden" name="product_id" value="{{product.id}}"/>
+				<div class="productview-options-dynamic" data-product-option-change style="display:none;">
+					{{inject 'showSwatchNames' theme_settings.show_product_swatch_names}}
+					{{#each product.options}}
+					{{#if partial '==' 'set-rectangle'}}
+						<style>
+							.productview-options-dynamic{
+								flex-direction: column-reverse !important;
+							}
+						</style>
+					{{/if}}
+					{{#if display_name '==' 'Performance Guarantee Details'}}
+						{{inject "myvar" "picklist"}}
+					{{/if}}
+					{{{dynamicComponent 'components/products/options'}}}
+					{{/each}}
+				</div>
+				<div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">
+					<label class="form-label form-label--alternate">
+					   
+					</label>
+				     </div>
+				     {{> components/products/add-to-cart}}
+				     {{#if product.out_of_stock}}
+					{{#if product.out_of_stock_message}}
+					{{> components/common/alert-error product.out_of_stock_message}}
+					{{else}}
+					{{> components/common/alert-error product.out_of_stock_message}}
+					{{/if}}
+				     {{/if}}
+			</form>
+			{{#if settings.show_wishlist}}
+				{{> components/common/wishlist-dropdown}}
+			{{/if}}
+			</div>
+		{{else}}        
+			<div class="price-container">
+				<div class="xx">
+				{{#if product.call_for_price}}
+				<p class="xx">
+					<span> {{product.call_for_price}}</span>
+				</p>
+				{{/if}}
+				<div class="xx">
+					{{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+					{{> components/products/price price=product.price schema_org=schema is_category=false}}
+					{{else}}
+					{{> components/common/login-for-pricing}}
+					{{/or}}
+				</div>
+				{{{region name="product_below_price"}}}
+				</div>
+			</div>
+			{{#each product.custom_fields}}
+			{{#if name '===' 'Rebate IDs'}}
+			{{#if value '===' '0'}}
+			{{else}}
+			<div style="display:flex;justify-content: space-between; padding-left:3%; padding-right:3%;">
+			        <span style="color:red">Rebate Available: </span>
+			        <span  id="rebate_details" style="color:rgb(97, 97, 97);text-decoration: underline;cursor: pointer;">See details</span>
+			</div>
+			{{/if}}
+			{{/if}}
+			{{/each}}
+		
+			
+			</div>
+		
+			<div class="productView-options">
+			{{#if product.release_date }}
+			<p>{{product.release_date}}</p>
+			{{/if}}
+		
+			<form class="form" method="post" action="{{product.cart_url}}" enctype="multipart/form-data"
+				data-cart-item-add>
+	
+				<input type="hidden" name="action" value="add">
+				<input type="hidden" name="product_id" value="{{product.id}}"/>
+				<div class="productview-options-dynamic" data-product-option-change style="display:none;">
+					{{inject 'showSwatchNames' theme_settings.show_product_swatch_names}}
+					{{#each product.options}}
+					{{#if partial '==' 'set-rectangle'}}
+						<style>
+							.productview-options-dynamic{
+								flex-direction: column-reverse !important;
+							}
+							@media(max-width:414px){
+								.productview-options-dynamic{
+									display:flex !important;
+								}
+							}
+						</style>
+					{{/if}}
+					{{#if display_name '==' 'Performance Guarantee Details'}}
+						{{inject "myvar" "picklist"}}
+					{{/if}}
+					{{{dynamicComponent 'components/products/options'}}}
+					
+					{{/each}}
+				
+					
+				</div>
+		
+	
+				
+
+				    <div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">
+					<label class="form-label form-label--alternate">
+					   
+					</label>
+				     </div>
+				     {{> components/products/add-to-cart}}
+				     {{#if product.out_of_stock}}
+					{{#if product.out_of_stock_message}}
+					{{> components/common/alert-error product.out_of_stock_message}}
+					{{else}}
+					{{> components/common/alert-error product.out_of_stock_message}}
+					{{/if}}
+				     {{/if}}
+
+
+
+			</form>
+			
+		</div>
+			{{#if settings.show_wishlist}}
+				{{> components/common/wishlist-dropdown}}
+			{{/if}}
+		{{/gt}}
+		{{/any}}
+
+		</div>
+		{{#if theme_settings.delivery_info '==' 'yes'}}
+		{{> components/page/home/product-view-delivery }}
+		{{/if}}
+		
+	</section>
+</div>
+                                         <!-- END OF PRODUCT ROW -->
+<div class="value-proposition" style="margin-bottom:2%;">
+	<div class="value-proposition-item">
+		<div>
+			<img src="{{cdn '/assets/img/product-page/price.png'}}"/>
+		</div>
+		<div>
+			<h3>Unbeatable Prices</h3>
+			<p>
+				Great deals everyday
+			</p>
+		</div>
+	</div>
+	<div class="value-proposition-item">
+		<div>
+			<img src="{{cdn '/assets/img/product-page/service.png'}}"/>
+		</div>
+		<div>
+			<h3>Great Service</h3>
+			<p>
+				Helpful & Professional
+			</p>
+		</div>
+	</div>
+	<div class="value-proposition-item">
+		<div>
+			<img src="{{cdn '/assets/img/product-page/selection.png'}}"/>
+		</div>
+		<div>
+			<h3>Wide Selection</h3>
+			<p>
+				Top brands you'll love
+			</p>
+		</div>
+	</div>
+	<div class="value-proposition-item">
+		<div>
+			<img src="{{cdn '/assets/img/product-page/trust.png'}}"/>
+		</div>
+		<div>
+			<h3>Community Trust</h3>
+			<p>
+				Locally owned & operated
+			</p>
+		</div>
+	</div>
+</div>
+
+{{#each product.custom_fields}}
+    {{#if name '===' 'Giftcard'}}
+    {{#if value '===' 'Yes'}}
+
+<div class="product-page-giftcard-banner">
+   <a href="/contact-us"> <img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/kings-gift-card-02-10-2021-2-.png"> </a>
+</div>
+    
+{{/if}}
+{{/if}}
+{{/each}}
+
+
+<div product-description-tabs>
+	<article class="productView-description"{{#if schema}} itemprop="description"{{/if}}>
+	{{#if theme_settings.show_product_details_tabs}}
+	{{> components/products/description-tabs}}
+	{{else}}
+	{{> components/products/description}}
+	{{/if}}
+	</article>
+</div>
+<div id="previewModal" class="modal modal--large" data-reveal>
+	<a href="#" class="modal-close" aria-label="{{lang 'common.close'}}" role="button">
+	<span aria-hidden="true">&#215;</span>
+	</a>
+	<div class="modal-content"></div>
+	<div class="loadingOverlay"></div>
+</div>
+<div id="financing-overlay" style="z-index:999;display:none;position:fixed;top:0;left:0;width:100%;height:100%;">
+	<div class="overlay-financing">
+		<h2>Financing</h2>
+		<p>
+			At Kings Great Buys Plus, we greatly honor the needs of our customers. To meet our customers needs, we offer a 
+			wide range of financing options. Whether it is regular financing through lenders such as Wells Fargo or other lending programs 
+			from other sources, we can help you get the electronic, appliance, or furniture item you need.
+		</p>
+		<a href="/financing/">LEARN MORE</a>
+	</div>
+</div>
+<div id="shipping-overlay" style="z-index:999;display:none;position:fixed;top:0;left:0;width:100%;height:100%;">
+	<div class="overlay-shipping">
+		<h2>Free Shipping</h2>
+		<p>
+			King's will deliver all appliance, furniture, or bedding orders of at least $499.99 of value for free within a 20-mile radius of any King's location. 
+			All other purchases will be charged $99.99 for delivery services. Installation services vary on product type and location.
+		</p>
+		<a href="/delivery/">LEARN MORE</a>
+	</div>
+</div>
+<div id="ask-for-price-overlay" style="z-index:999;display:none;position:fixed;top:0;left:0;width:100%;height:100%;">
+	<div class="overlay-financing">
+		<a class="ask-for-price-exit">X</a>
+		<h2>Want a quotation of {{product.title}}?</h2>
+		<form action="mailto:Support@kingsgreatbuys.com" method="post" enctype="text/plain">
+			<div class="form-row form-row--half">
+				<div class="form-field">
+					<input class="form-input" type="text" id="product_name" name="product_name" value="{{product.title}}" readonly>
+				</div>
+				<div class="form-field">
+					<input class="form-input" type="text" id="product_sku"  name="product_sku" value="{{product.sku}}" readonly>
+				</div>
+				<div class="form-field">
+					<input class="form-input" type="text" id="fullname" name="fullname" placeholder="Full Name" value="{{customer.name}}" required>
+				</div>
+				<div class="form-field">
+					<input class="form-input" type="text" id="phone" placeholder="Phone" name="Phone" value="{{customer.phone}}" required>
+				</div>
+				<div class="form-field">
+					<input class="form-input" type="text" id="email" placeholder="Email" name="Email" value="{{customer.email}}" required>
+				</div>
+				<div class="form-field">
+					<input class="form-input" placeholder="Company" type="text" id="contact_companyname" name="Company" required>
+				</div>
+			</div>
+			<div class="form-field">
+				<textarea name="Comment/Question" id="contact_question" placeholder="Message" rows="5" cols="50" class="form-input"></textarea>
+			</div>
+			<div class="form-actions">
+				<input class="button button--primary" type="submit" value="{{lang 'forms.contact_us.submit' }}">
+			</div>
+		</form>
+	</div>
+</div>
+<!--
+	<script>
+	$(function () {
+	    $('.read-more-product-page').click(function () {
+	        $('#datalist li:hidden').slice(0).show();
+	        if ($('#datalist li').length == $('#datalist li:visible').length) {
+	            $('.read-more-product-page').hide();
+	        }
+	    });
+	});
+	</script>
+-->
+{{#contains product.category "Bedding"}}
+{{#if product.brand}}
+{{product.brand.name}}
+{{#if product.brand.name "==" "Malouf"}}
+<script>
+  $(document).ready(function () {
+	$(".productView-description").addClass("bedding");
+	$(".container.collapse.collapse-init details:nth-child(2)").css("display","none");
+	  if($(".container.collapse.collapse-init details:first-child")){
+		if($(".details-wrapper .details-styling h2").html() == "Description"){
+		$(".panel-active .details-wrapper .details-styling").addClass("bedding-styling");
+		$(".panel-active .details-wrapper .details-styling p img").first().addClass("first-image");
+		$(".panel-active .details-wrapper .details-styling p img.first-image").parent().addClass("float-left");
+		$(".panel-active .details-wrapper .details-styling p img").addClass("w-100");
+		$(".panel-active .details-wrapper .details-styling ol").addClass("float-right");
+		$(".panel-active .details-wrapper .details-styling div").addClass("grid-div");
+		$(".panel-active .details-wrapper .details-styling").first().append("<div class='flex-specs'></div>");
+		$(".flex-specs").insertBefore($(".details-wrapper .details-styling div").first());
+		$(".flex-specs").append($(".details-wrapper .details-styling p.float-left"));
+		$(".flex-specs").append($(".details-wrapper .details-styling ol.float-right"));
+		$(".flex-specs").append("<div class='grid-features'></div>");
+		$(".grid-features").insertAfter($(".flex-specs"));
+		$(".grid-features").append($(".grid-div"));
+		$(".spec-body").addClass("bedding-table");
+		$(".details-styling.bedding-styling p").first().css("padding", "0 3.5rem");
+		$(".container.collapse.collapse-init details:first-child").addClass("special-feature-tab");
+		$(".spec-body.bedding-table").insertAfter($(".special-feature-tab"));
+		$(".value-proposition").insertAfter($(".spec-body.bedding-table"));
+		$(".value-proposition").css("padding","40px 0")
+		$(".productview-options-dynamic").addClass("bedding-options");
+		var links = $(".grid-div label");
+		for (var i = 0; i < links.length; i++) {
+			links[i].innerHTML = links[i].innerHTML.toLowerCase();
+		}
+	  }else{}
+
+	  }
+		if($(".grid-features").html().length == 0){
+			$(".grid-features").remove();
+		}
+
+		if($(".productview-quick-specs ul.bedding-products").text().length == 0){
+			$(".productview-quick-specs h4").css("display","none");
+		}
+
+  });	
+</script>
+{{/if}}
+{{/if}}
+{{/contains}}
+
+<script>
+	   $(document).ready(function () {
+                        var element = document.getElementById('#rebate');
+                        $('#rebate_details').click(function(){
+                               $('details').removeClass('panel-active');
+                               $('details').removeAttr('open');
+                               $('[rebate-idd]').addClass('panel-active');
+                               $('[rebate-idd]').attr('open' ,' ');
+                               element.scrollIntoView({behavior: "smooth", block: "center", inline: "start"});
+                        });
+		        $('.prod-opt').filter(function(){
+                        	return $(this).text().trim().length == 0;
+              		}).remove();
+              		
+
+				
+				
+				
+        });
+
+
+
+	       //to automate star reviews in product description
+function addEventListenerStamped(el, eventName, handler) { 
+   if (el.addEventListener) { el.addEventListener(eventName, handler); }
+   else { el.attachEvent('on' + eventName, function () { handler.call(el); }); } 
+}
+
+// Listening for event
+addEventListenerStamped(document, '##replaceWithEventName##', function(e) {
+
+});
+// Example
+// Listening for reviews widget loaded event
+addEventListenerStamped(document, 'stamped:reviews:loaded', function(e) {
+	var count = $('#tab-reviews').attr('data-count');
+	var reviews = $('#label_reviews');
+	var str = '';
+	if(count < 1 ){
+		str  = '( No ratings yet )';	
+	}else{
+		str = '(' + count + ' reviews )';
+	}
+	reviews.text(str);
+});
+//fOr text align teh extended warranty and color options center
+var flag = JSON.parse({{jsContext}});
+//check if PG was presented in price box
+if(flag.myvar == 'picklist'){
+	$('div.form-field[data-product-attribute=swatch]').css('padding-right','3%');
+	$('div.form-field[data-product-attribute=set-rectangle]').css('padding-left','3.4%');
+	$('div.form-field[data-product-attribute=set-rectangle]').css('text-align','center');
+	$('div.form-field[data-product-attribute=set-rectangle]').css('display','flex');
+	$('div.form-field[data-product-attribute=set-rectangle]').css({'flex-wrap':'wrap','justify-content':'center'});
+	$('div.form-field[data-product-attribute=set-rectangle] label:nth-child(1)').css('order','1');
+
+	$('div.form-field[data-product-attribute=set-rectangle] label:nth-child(7)').css({'order':'2','flex':'1 1 47%','background-color':'#d22229','color':'white','line-height':'15px'});
+	$('div.form-field[data-product-attribute=set-rectangle] label:nth-child(5)').css({'order':'3','flex':'1 1 47%','background-color':'#d22229','color':'white','line-height':'15px'});
+	$('div.form-field[data-product-attribute=set-rectangle] label:nth-child(3)').css({'order':'4','flex':'0 1 200px','background-color':'#d22229','color':'white','line-height':'15px'});
+
+}
+
+</script>
+<style>
+	.form-option{
+		margin-right:0 !important;
+
+		
+	}
+	/* override the options*/
+	.form-option-variant {
+
+	font-size: 12px;
+
+	}
+
+	@media(max-width:551px){
+		/* learn more btn */
+		#lrnmore-btn{
+			text-align: center !important;
+			padding:15px;
+		}
+	}
+	.flex-div-productActions .form-action{
+	    width:100% !important;
+	}
+	.form-field.form-field--increments{
+	display:flex;
+	align-items: center;
+	}
+	.product-badge{
+		flex-wrap:wrap;
+	}
+	.remove-pseudo::before,.remove-pseudo::after{
+		content:none;
+		display:none !important;
+	}
+
+</style>
+<script>
+	//dont edit this code
+    
+	// make radio button into rectangle only for PG 
+	$(document).ready(function(){
+
+		let pg = [];
+		var  x = $('[data-product-option-change] .form-field label:first-child');
+		$.each(x,function(key,val){
+			var txt = $(val).text().trim();
+			if(txt == 'Performance Guarantee Details:' || txt == 'Performance Guarantee Details::'){
+				// $(val).eq(0).css('display','none');.
+				$(val).parent().css({'display':'flex','flex-wrap':'wrap','justify-content':'center'});
+			        $(val).next().next().remove();
+				pg.push($(val).next().next().next());
+				pg.push($(val).next().next().next().next().next());
+				pg.push($(val).next().next().next().next().next().next().next());
+				$(val).next().next().next().next().next().css('box-shadow','black 0px 0px 0px 2px');
+			}
+		});
+
+		$.each(pg,function(i,v){
+			$(v).addClass('remove-pseudo');
+			
+			$(v).css({
+				'padding' :'5px',
+				'background-color' :'#d22229',
+				'text-align':'center',
+				'color':'white',
+				'font-size':'12px',
+				'width':'45%',
+				'border-radius':'8px',
+				'margin':'5px'
+			});
+			
+			
+			$(v).click(function(){
+				$('.remove-pseudo').css('box-shadow','none');
+				$(this).css('box-shadow','black 0px 0px 0px 2px');
+			});
+		});
+		
+	});
+</script>
+
+<script>
+$(document).ready(function(){
+
+	$(".form-option, .form-option-swatch").click(function(){
+		
+		setTimeout(function(){
+		var variantStock = $('[data-product-stock]').text()
+		console.log($('[data-product-stock]').text());
+			
+		if(variantStock == 999999){
+			if(window.BCData.product_attributes.stock == null && window.BCData.product_attributes.instock == true){
+
+			}else{
+				$(".red-ribbon.on-order").addClass("avail");
+				console.log($('.red-ribbon.on-order').text());
+				$('.red-ribbon.on-order').text("Available to Order");
+			}
+		}else if(variantStock == 999999999){
+			if(window.BCData.product_attributes.stock == null && window.BCData.product_attributes.instock == true){
+
+			}else{
+				$(".red-ribbon.on-order").removeClass("in-stock");
+				$(".red-ribbon.on-order").addClass("avail");
+				console.log($('.red-ribbon.on-order').text());
+				$('.red-ribbon.on-order').text("Available to Order");
+			}
+		}else if(variantStock >= 7){
+			if(window.BCData.product_attributes.stock == null && window.BCData.product_attributes.instock == true){
+
+			}else{
+				$(".red-ribbon.on-order").removeClass("avail");
+				$(".red-ribbon.on-order").addClass("in-stock");
+				$('.red-ribbon.on-order').text("In Stock");
+			}
+
+		}else if(variantStock <= 3){
+			if(window.BCData.product_attributes.stock == null && window.BCData.product_attributes.instock == true){
+
+			}else{
+				$(".red-ribbon.on-order").removeClass("avail");
+				$(".red-ribbon.on-order").removeClass("in-stock");
+				$('.red-ribbon.on-order').text("Out of Stock");
+				$("input#form-action-addToCart").attr("disabled", true);
+				$(".form-field.form-field--increments .form-increment button").attr("disabled", true);
+				$(".form-field.form-field--increments .form-increment select").attr("disabled", true);
+				$(".alertBox.productAttributes-message").css("display","block");
+				$(".alertBox-column.alertBox-message").text("Not currently in stock - Available to order");
+				console.log("Out of Stock");
+			}
+		}else if(variantStock >= 4){
+			if(window.BCData.product_attributes.stock == null && window.BCData.product_attributes.instock == true){
+
+			}else{
+				$(".red-ribbon.on-order").removeClass("avail");
+				$(".red-ribbon.on-order").removeClass("in-stock");
+				$(".red-ribbon.on-order").addClass("available-to-order");
+				$('.red-ribbon.on-order').text("Low Stock");
+			}
+
+		}else{
+	
+		}
+		
+		
+		
+		
+		},1000);
+	});
+	
+	setTimeout(function(){
+	var variantStock = $('[data-product-stock]').text()
+	if(variantStock == 999999){
+		if(window.BCData.product_attributes.stock == null && window.BCData.product_attributes.instock == true){
+
+		}else{
+			$(".red-ribbon.on-order").addClass("avail");
+			console.log($('.red-ribbon.on-order').text());
+			$('.red-ribbon.on-order').text("Available to Order");
+		}
+	}else if(variantStock == 999999999){
+		if(window.BCData.product_attributes.stock == null && window.BCData.product_attributes.instock == true){
+
+		}else{
+			$(".red-ribbon.on-order").addClass("avail");
+			console.log($('.red-ribbon.on-order').text());
+			$('.red-ribbon.on-order').text("Available to Order");
+		}
+	}else if(variantStock >= 7){
+		if(window.BCData.product_attributes.stock == null && window.BCData.product_attributes.instock == true){
+
+		}else{
+			$(".red-ribbon.on-order").removeClass("avail");
+			$(".red-ribbon.on-order").addClass("in-stock");
+			$('.red-ribbon.on-order').text("In Stock");
+		}
+
+	}else if(window.BCData.product_attributes.stock == null && window.BCData.product_attributes.instock == true){
+		$(".red-ribbon.on-order").addClass("in-stock");
+		$('.red-ribbon.on-order').text("Available");
+
+	}else if(variantStock <= 3 && window.BCData.product_attributes.stock <= 3){
+		if(window.BCData.product_attributes.stock == null && window.BCData.product_attributes.instock == true){
+
+		}else{
+			$(".red-ribbon").removeClass("avail");
+			$(".red-ribbon").removeClass("in-stock");
+			$(".red-ribbon").addClass("on-order");
+			$('.red-ribbon').text("Out of Stock");
+			setTimeout(function(){
+				console.log("Out Of Stock");
+				$("input#form-action-addToCart").attr("disabled", true);
+				$(".form-field.form-field--increments .form-increment button").attr("disabled", true);
+				$(".form-field.form-field--increments .form-increment select").attr("disabled", true);
+				$(".alertBox.productAttributes-message").css("display","block");
+				$(".alertBox-column.alertBox-message").text("Not currently in stock - Available to order");
+			},1000);
+			
+			if(window.BCData.product_attributes.instock == false && "window.BCData.product_attributes.stock_message == Not currently in stock - Available to order" && window.BCData.product_attributes.stock == 0){
+					setTimeout(function(){
+						$(".alertBox.alertBox--error").css("display","none");
+					},1000);
+					console.log("Out of Stock 1");
+			}
+		}
+
+	}else if(variantStock >= 4){
+		if(variantStock<=6){
+
+			if(window.BCData.product_attributes.stock == null && window.BCData.product_attributes.instock == true){
+
+			}else{
+				$(".red-ribbon").removeClass("avail");
+				$(".red-ribbon").removeClass("in-stock");
+				$(".red-ribbon").addClass("available-to-order");
+				$('.red-ribbon').text("Low Stock");
+			}
+		}
+		}else if(window.BCData.product_attributes.instock == true && window.BCData.product_attributes.stock >= 4){
+						if(window.BCData.product_attributes.stock<=6){
+							if(window.BCData.product_attributes.stock == null && window.BCData.product_attributes.instock == true){
+
+							}else{
+								$(".red-ribbon").removeClass("avail");
+								$(".red-ribbon").removeClass("in-stock");
+								$(".red-ribbon").addClass("available-to-order");
+								$('.red-ribbon').text("Low Stock");
+								console.log("Low Stock");
+							}
+		}
+					}else{
+	
+		}
+	},1000);
+
+});
+</script>
+
+<script>
+	// PopUp Extended Guarantee
+	window.onload = function () {
+        if (localStorage.getItem("hasCodeRunBefore") === null) {
+            localStorage.setItem("hasCodeRunBefore", true);
+            console.log("First load");
+
+			$('body').append('<div class="popup-online-only" style="display:flex;">'+
+				'<div class="extperformace-container">'+
+					'<div class="close-button"><i class="fa fa-times"></i></div>'+
+					'<div class="experformance-content">'+
+						'<img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/bg-image.png" class="w-100">'+
+						'<div class="abs-con">'+
+							'<img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/5-years-icon.png" class="lazyload">'+
+							'<h2>This product qualifies for King’s <br> <b>Performance Guarantee!</b></h2>'+							
+								'<a href="#">Learn More</a>'+
+							'</div>'+
+						'</div>'+	
+					'</div>'+
+				'</div>'+
+				'</div>');
+
+			$('.extperformace-container .close-button').hover(function() {
+					$('.extperformace-container .close-button').css("cursor","pointer");
+				});
+			$('.extperformace-container .close-button').click(function(){
+					$('.popup-online-only').css('display','none');
+				});
+				
+				setTimeout(function(){
+					if(window.BCData.product_attributes.instock == true && window.BCData.product_attributes.stock >= 7){
+						if(window.BCData.product_attributes.stock == null && window.BCData.product_attributes.instock == true){
+
+						}else{
+							$(".red-ribbon.on-order").removeClass("avail");
+							$(".red-ribbon.on-order").addClass("in-stock");
+							$('.red-ribbon.on-order').text("In Stock");
+							$(".form-field .form-radio").removeAttr("checked");
+							$(".form-field .form-radio").attr("data-state", false);
+							$("input#form-action-addToCart").attr("disabled", true);
+							$(".form-field.form-field--increments .form-increment button").attr("disabled", true);
+							$(".form-field.form-field--increments .form-increment select").attr("disabled", true);
+							console.log("In Stock");
+						}
+					}else if(window.BCData.product_attributes.instock == true && window.BCData.product_attributes.stock >= 4){
+						if(window.BCData.product_attributes.stock<=6){
+							if(window.BCData.product_attributes.stock == null && window.BCData.product_attributes.instock == true){
+
+							}else{
+								$(".red-ribbon.on-order").removeClass("avail");
+								$(".red-ribbon.on-order").removeClass("in-stock");
+								$(".red-ribbon.on-order").addClass("available-to-order");
+								$('.red-ribbon.on-order').text("Low Stock");
+								$(".form-field .form-radio").removeAttr("checked");
+								$(".form-field .form-radio").attr("data-state", false);
+								console.log("Low Stock");
+							}
+						}	
+					}else if(window.BCData.product_attributes.instock == false ){
+						if(window.BCData.product_attributes.stock == null && window.BCData.product_attributes.instock == true){
+
+						}else{
+							$(".red-ribbon.on-order").removeClass("avail");
+							$(".red-ribbon.on-order").removeClass("in-stock");
+							$(".red-ribbon.on-order").addClass("on-order");
+							$('.red-ribbon.on-order').text("Out of Stock");
+							$(".form-field .form-radio").removeAttr("checked");
+							$(".form-field .form-radio").attr("data-state", false);
+						}
+						
+						console.log("Out of Stock");
+					}else if(window.BCData.product_attributes.instock == true && window.BCData.product_attributes.stock <= 3){
+						if(window.BCData.product_attributes.stock == null && window.BCData.product_attributes.instock == true){
+
+						}else{
+							$(".red-ribbon.on-order").removeClass("avail");
+							$(".red-ribbon.on-order").removeClass("in-stock");
+							$(".red-ribbon.on-order").addClass("on-order");
+							$('.red-ribbon.on-order').text("Out of Stock");
+							$(".form-field .form-radio").removeAttr("checked");
+							$(".form-field .form-radio").attr("data-state", false);
+							$("input#form-action-addToCart").attr("disabled", true);
+							$(".form-field.form-field--increments .form-increment button").attr("disabled", true);
+							$(".form-field.form-field--increments .form-increment select").attr("disabled", true);
+							$(".alertBox.productAttributes-message").css("display","block");
+							$(".alertBox-column.alertBox-message").text("Not currently in stock - Available to order");
+							console.log("First Load Out of Stock");
+						}
+					}else{
+						
+					}
+
+					
+				},1000);
+
+	
+				
+				
+			}else{
+				console.log("false");
+			}
+		}
+		
+		$('.spec-body td[colspan]').not('td[colspan=1]').css({'text-shadow':'black 0px 0px, black 0px 0px, black 0px 0px','letter-spacing':'1px'});
+		
+		
+</script>
+
+<script>
+	$(document).ready(function(){
+		if ($('.productview-quick-specs ul').children('li').length == 0) {
+			console.log("0")
+		}
+	})
+</script>

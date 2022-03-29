@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ head.title }}</title>
+    {{{ head.meta_tags }}}
+    {{{ head.config }}}
+
+    <link href="{{ head.favicon }}" rel="shortcut icon">
+    {{#block "head"}}{{/block}}
+    
+	{{> layout/_head-script }}
+
+</head>
+<body>
+    {{#block "page"}}{{/block}}
+	
+	{{> layout/_footer-script }}
+</body>
+</html>

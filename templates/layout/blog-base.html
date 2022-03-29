@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html class="no-js" lang="{{ locale_name }}">
+    <head>
+        <title>{{ head.title }}</title>
+        {{{ resourceHints }}}
+        {{{ head.meta_tags }}}
+        {{{ head.config }}}
+        {{#block "head"}} {{/block}}
+
+        <link href="{{ head.favicon }}" rel="shortcut icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+		{{> layout/_head-script }}
+		
+    </head>
+    <body class="">
+        <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
+        
+		
+        {{> components/common/header }}
+        <div class="body blog-body" data-currency-code="{{currency_selector.active_currency_code}}">
+            {{#block "hero"}} {{/block}}
+            {{#block "page"}} {{/block}}    
+            {{> components/common/modal}}
+            {{> components/common/alert-modal}}
+        </div>
+        {{> components/common/footer }}
+		
+		
+		{{> layout/_footer-script }}
+    </body>
+</html>

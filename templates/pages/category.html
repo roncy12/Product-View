@@ -1,0 +1,88 @@
+---
+category:
+    shop_by_price: true
+    products:
+        limit: {{theme_settings.categorypage_products_per_page}}
+---
+{{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{#partial "head"}}
+    {{#if pagination.category.previous}}
+        <link rel="prev" href="{{pagination.category.previous}}">
+    {{/if}}
+    {{#if pagination.category.next}}
+        <link rel="next" href="{{pagination.category.next}}">
+    {{/if}}
+{{/partial}}
+
+{{#partial "page"}}
+
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+{{#unless theme_settings.hide_category_page_heading }}
+      
+    
+{{/unless}}
+{{{category.description}}}
+<div class="page">
+    {{#if category.faceted_search_enabled}}
+        <aside class="page-sidebar" id="faceted-search-container">
+            {{> components/category/sidebar}}
+        </aside>
+    {{else if category.subcategories}}
+        <aside class="page-sidebar" id="faceted-search-container">
+            {{> components/category/sidebar}}
+        </aside>
+    {{else if category.shop_by_price}}
+        {{#if theme_settings.shop_by_price_visibility}}
+             <aside class="page-sidebar" id="faceted-search-container">
+                {{> components/category/sidebar}}
+            </aside>
+        {{/if}}
+    {{/if}}
+
+    <main class="page-content" id="product-listing-container">
+        
+
+                
+          
+        
+                
+           
+             {{#if category.name '==' 'Giftcard' }}
+         
+            <a href="/contact-us"> <img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/kings-gift-card-02-10-2021-2-.png"> </a>
+        {{else}}
+           <a href="/deal-match/"><img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/deal-match-banner-small.png?t=1633915193&_gl=1*wgnkvz*_ga*NjI0NTc5OTk1LjE2MTgyMTQ3OTI.*_ga_WS2VZYPC6G*MTYzMzkxMzYyOC4xOTAuMS4xNjMzOTE1MDc5LjU."></a>
+            
+                  {{/if}}
+
+
+             {{#each categories}}
+                    {{#all (if name '==' 'Furniture') (if is_active)}}
+                        <div style="margin-top:15px;">
+                            <p style="text-align: center; margin-bottom: 0px;">
+                                <strong>
+                                    <span style="font-size: large;">We have many furniture pieces in stock and ready for immediate delivery!<br />The items shown on this site are just example of what King's carries.<br /></span>
+                                </strong>
+                            </p>
+                            <p style="color: #d22229; text-decoration: underline; font-size: large; text-align: center; cursor: pointer;">
+                                <span style="color: #d22229;">
+                                    <a style="text-decoration-color: #d22229;" href="https://kingsgreatbuys.com/locations/">
+                                        <span style="color: #d22229;"><strong>Please call us at the store for current stock and pricing!</strong></span>
+                                    </a>
+                                </span>
+                            </p>
+                       </div> 
+                    {{/all}}
+             {{/each}}
+        {{#if category.products}}
+            {{> components/category/product-listing}}
+        {{else}}
+            <p>{{lang 'categories.no_products'}}</p>
+        {{/if}}
+        {{{region name="category_below_content"}}}
+    </main>
+</div>
+
+{{/partial}}
+{{> layout/category-base}}

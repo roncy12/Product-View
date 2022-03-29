@@ -1,0 +1,59 @@
+{{#partial "page"}}
+<div class="container-promote">
+         <div class="banner-samsung">
+               <img class="lazyload" src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/samsung-promotion-banner.png?t=1634179797&_gl=1*1v5mts9*_ga*NjI0NTc5OTk1LjE2MTgyMTQ3OTI.*_ga_WS2VZYPC6G*MTYzNDE3OTUwNS4yMDcuMS4xNjM0MTc5NzY4LjU3" alt="">
+         </div>
+         <div class="blurb-title">
+                  <h2>Kitchen Package</h2>
+                  <span>Sarting at $499 with great qualities and great features.</span>
+         </div>
+         <div class="promotion-product-container">
+                  
+                           <div class="content-tab">
+                                    {{> components/page/home/product-with-price skus="RF28R7551SG" }}
+                           </div>
+                           <div class="content-tab">
+                                    {{> components/page/home/product-with-price skus="DW80R9950UG" }}
+                           </div>
+
+                           <div class="content-tab">
+                                    {{> components/page/home/product-with-price skus="NE63T8711SG" }}
+                           </div>  
+                           <div class="content-tab">
+                                    {{> components/page/home/product-with-price skus="MC17T8000CG" }}
+                           </div>            
+         </div>
+
+
+</div>
+
+{{/partial}}
+{{> layout/home-base}}
+
+
+<script>
+         $(document).ready(function(){
+                      $('.tab-content').each(function(){
+                             var id = $(this).attr('id');
+                             var trim_id = id.substr(4);
+                             var x = $(this).find('.content-tab').text().trim().length;
+                             $('.tab-title').each(function(){
+                                    var href = $(this).attr("href").substr(5);
+                                    if(href == trim_id){
+                                           if(x == 0 ){
+                                               $(this).parent().remove();
+                                           }
+                                    }
+                             });
+  
+                           
+                       });
+  
+                $('.product-slot').filter(function(){
+                          return $(this).text().trim().length == 0;
+                }).remove();
+         });
+  
+        
+  
+  </script>

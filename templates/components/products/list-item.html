@@ -1,0 +1,323 @@
+{{#if settings.data_tag_enabled}}
+<article class="listItem" data-event-type="{{event}}" data-entity-id="{{id}}" data-position="{{position}}" data-name="{{name}}" data-product-category="{{#each category}}{{#if @last}}{{this}}{{else}}{{this}}, {{/if}}{{/each}}" data-product-brand="{{brand.name}}" data-product-price="{{#if price.with_tax}}{{price.with_tax.value}}{{else}}{{price.without_tax.value}}{{/if}}">
+{{else}}
+<!-- <article class="listItem"> -->
+	{{/if}}
+	<a href="{{url}}">
+		<figure class="listItem-figure">
+			{{> components/common/responsive-img
+			image=image
+			class="listItem-image"
+			fallback_size=theme_settings.productgallery_size
+			lazyload=theme_settings.lazyload_mode
+			default_image=theme_settings.default_image_product
+			}}
+			<!--<a class="list-free-shipping">Free Shipping</a>-->
+			{{#unless hide_product_quick_view}}
+			{{#if theme_settings.show_product_quick_view}}
+			<div class="listItem-figureBody">
+				<a {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}} class="button button--small listItem-button quickview" data-product-id="{{id}}">{{lang 'products.quick_view'}}</a>
+			</div>
+			{{/if}}
+			{{/unless}}
+			<div class="star-container">
+				{{#each custom_fields}}
+					{{#if name '==' 'Rebate IDs'}}
+						{{#if value '==' 0}}
+						{{else}}
+						<p>REBATE</p>
+						{{/if}}
+					{{/if}}
+				{{/each}}
+				{{#each custom_fields}}
+					{{#all (if name '==' 'Energy Star') (if value '==' 'Yes')}}
+						<div class="img">
+							<img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/energy-star.png?t=1632121689&_gl=1*1cl4wb9*_ga*NjI0NTc5OTk1LjE2MTgyMTQ3OTI.*_ga_WS2VZYPC6G*MTYzMjExNTQ3OC4xMTUuMS4xNjMyMTIxNjUzLjQ0" alt="" class="lazyload">
+						</div>
+					{{/all}}
+					
+				{{/each}}
+			
+					
+			</div>
+		</figure>
+	</a>
+	<div class="listItem-details">			
+                 {{#if brand.name}}
+			<img  alt="" class="cardlogoimage {{sku}} lazyload" src="/product_images/uploaded_images/{{toLowerCase (dashcase brand.name)}}.jpg">
+   		{{/if}} 
+		<h4 class="listItem-title">
+			<a style="-webkit-box-orient: vertical;" href="{{url}}" {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}}>{{name}}</a>
+		</h4>
+		{{#if show_rating}}
+			<p class="listItem-rating">
+				{{> components/products/ratings rating=rating}}
+			</p>
+		{{/if}}
+		<p style="color:#757575;margin-bottom:.3rem;">
+			<strong>{{sku}}</strong>
+		</p>
+
+		<!-- {{assignVar 'has_dimension' 0 }}				
+		{{#each custom_fields}}
+			{{#inArray (split "Height,Width,Depth" ",")  name }}
+				{{#all (if (length value) '>' 0) (if (getVar 'has_dimension') '==' 0 ) }}
+					<div class="list-summary">	
+					<label><strong>Dimensions:</strong></label>
+						<span class="fword">
+						{{#each ../../../custom_fields}}
+							{{#inArray (split "Height,Width,Depth" ",")  name }}
+								{{#if (length value) '>' 0 }}
+									{{#if (getVar 'has_dimension') '==' 1 }} x {{/if}}		
+									{{truncate name 1}} {{value}} in
+									{{assignVar 'has_dimension' 1 }}
+								{{/if}}				 
+							{{/inArray}}		
+						{{/each}}
+						</span>
+					</div>
+					{{assignVar 'has_dimension' 1 }}
+				{{/all}}				 
+			{{/inArray}}		
+		{{/each}} -->
+		<ul style="list-style: disc;">
+			{{#each custom_fields}}
+				
+				{{#if (truncate name  7) '==' 'Feature'}}
+					<li>{{value}}</li>
+				{{/if}}
+			{{/each}}
+		</ul>			  
+		<div class="productView-options">
+			<div data-product-option-change style="display:none;">
+				{{#each options.name}}
+					{{{dynamicComponent 'components/products/options'}}}
+				{{/each}}
+			</div>
+		</div>
+		<div class="list-item-below">
+				<div class="left-list-below">
+					<div>
+						<img class="" src="{{cdn 'assets/img/category/check.png'}}"> Free In-Store Pickup
+					</div>
+					<div>
+						<img class="" src="{{cdn 'assets/img/category/check.png'}}"> Free Shipping
+					</div>
+				</div>
+				<div class="right-lest-below">
+							<div>
+								<a class="">Request More Info</a>
+							</div>
+				</div>
+			</div>
+		</div>
+			{{#if price.without_tax.value '>=' '999999'}}
+			<div class="listItem-actions">
+				<div class="list-action-container">
+					<div class="d-none" style="display: none;">
+						{{#each custom_fields}}
+							{{#if name '===' 'Inv Flag'}}
+							<div class="store-deal-container">
+								<div class="red-ribbon {{lowercase (dashcase value)}}">{{value}}</div>
+							</div>
+							{{else}}
+								{{#if name '===' 'In-Store Deal'}}
+									<div class="store-deal-container">
+										<div class="red-ribbon in-store-deal">In-Store Deal</div>
+									</div>
+								{{/if}}
+							{{/if}}	
+						{{/each}}
+					</div>
+					{{#inArray (pluck breadcrumbs 'name') 'Furniture'}}
+					{{else}}
+					<div class="store-deal-container">	
+				
+						{{#if stock_level}}
+							{{#gt stock_level 7}}
+								<div class="red-ribbon in-stock">In Stock</div>
+							{{/gt}} 
+							{{#if stock_level ">=" "4"}}
+								{{#lte stock_level 6}}
+									<div class="red-ribbon available-to-order">Low Stock</div>
+								{{/lte}}
+							{{/if}}
+							{{#lte stock_level 3}}
+								<div class="red-ribbon on-order">Out of Stock</div>
+							{{/lte}}
+						{{else}}
+	                            {{#if out_of_stock_message }}
+	                                  <div class="red-ribbon on-order">Out of Stock</div>
+	                            {{/if}}
+						{{/if}}
+					</div>
+					{{/inArray}}
+					<a class="btn button button--small btn-ask" style="font-size:14px;" product_name="{{name}}" model="{{sku}}" href="tel:812-473-5464">
+						CALL FOR PRICE
+					</a>
+
+					<a href="{{add_to_wishlist_url}}" style="color:red" {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}} class="button button--small sub-button">{{lang 'products.wishlist'}}</a>
+					{{#if show_compare}}
+					<label class="button button--small xx" for="compare-{{id}}" style="padding:0 !important;">
+						<div style="display:flex;justify-content: center;align-items:center;">
+							<input class="cmp" type="checkbox" name="products[]" value="{{id}}" id="compare-{{id}}" data-compare-id="{{id}}" style="margin-right:2%;margin-top:0px;">
+							 <img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/compare-icon.png?t=1624248002&_ga=2.94277407.308044551.1624238785-624579995.1618214792" alt="compare icon" width="15" style="margin-left:3%;">
+							<span style="white-space: nowrap;margin-left:7%;">{{lang "ADD TO COMPARE"}}</span>
+						</div>
+					</label>
+					{{/if}}
+				</div>
+			</div>
+			{{else}}
+            {{#gt stock_level 10000}}
+			<div class="listItem-actions">
+				<div class="list-action-container">
+					<div class="d-none" style="display: none;">
+					{{#each custom_fields}}
+					{{#if name '===' 'Inv Flag'}}
+					<div class="store-deal-container">
+						<div class="red-ribbon {{lowercase (dashcase value)}}">{{value}}</div>
+					</div>
+					{{else}}
+						{{#if name '===' 'In-Store Deal'}}
+							<div class="store-deal-container">
+								<div class="red-ribbon in-store-deal">In-Store Deal</div>
+							</div>
+						{{/if}}
+					{{/if}}
+					{{/each}}
+				</div>
+	            {{#inArray (pluck breadcrumbs 'name') 'Furniture'}}
+				{{else}}
+				<div class="store-deal-container">	
+				{{#if stock_level}}
+					{{#gt stock_level 7}}
+						<div class="red-ribbon in-stock">In Stock</div>
+					{{/gt}} 
+					{{#if stock_level ">=" "4"}}
+						{{#lte stock_level 6}}
+							<div class="red-ribbon available-to-order">Low Stock</div>
+						{{/lte}}
+					{{/if}}
+					{{#lte stock_level 3}}
+						<div class="red-ribbon on-order">Out of Stock</div>
+					{{/lte}}
+				{{else}}
+	                            {{#if out_of_stock_message }}
+	                                  <div class="red-ribbon on-order">Out of Stock</div>
+	                            {{/if}}
+				{{/if}}
+				</div>
+				{{/inArray}}
+					{{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+						{{#if price}}
+							<div class="listItem-price">{{> components/products/price price=price is_category=true}}</div>
+						{{/if}}
+					{{else}}
+						{{> components/common/login-for-pricing}}
+					{{/or}}
+					{{#if show_cart_action}}
+						{{#if has_options}}
+							<a href="{{url}}" {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}} class="button button--small" data-product-id="{{id}}" style="white-space: nowrap;">{{lang 'products.choose_options'}}</a>
+						{{/if}}
+						{{#if add_to_cart_url }}
+							<a href="{{add_to_cart_url}}" {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}} class="button button--small">{{lang 'products.add_to_cart'}}</a>
+						{{/if}}
+				
+					{{/if}}
+					<a href="{{add_to_wishlist_url}}" {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}} class="button button--small sub-button" style="color: #f00;background-color: #fde8e8;border:none;">{{lang 'products.wishlist'}}</a>
+					{{#if show_compare}}
+					<label class="button button--small xx" for="compare-{{id}}" style="padding:0 !important;">
+						<div style="display:flex;justify-content: center;align-items:center;">
+							<input class="cmp" type="checkbox" name="products[]" value="{{id}}" id="compare-{{id}}" data-compare-id="{{id}}" style="margin-right:2%;margin-top:0px;height:0;">
+							 <img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/compare-icon.png?t=1624248002&_ga=2.94277407.308044551.1624238785-624579995.1618214792" alt="compare icon" width="15" style="margin-left:3%;">
+							<span style="white-space: nowrap;margin-left:7%;">{{lang "ADD TO COMPARE"}}</span>
+						</div>
+					</label>
+					{{/if}}
+				</div>
+			</div>
+			{{else}}
+				<div class="listItem-actions">
+					<div class="list-action-container">
+						<div class="d-none" style="display: none;">
+							{{#each custom_fields}}
+							{{#if name '===' 'Inv Flag'}}
+							<div class="store-deal-container">
+								<div class="red-ribbon {{lowercase (dashcase value)}}">{{value}}</div>
+							</div>
+							{{else}}
+								{{#if name '===' 'In-Store Deal'}}
+									<div class="store-deal-container">
+										<div class="red-ribbon in-store-deal">In-Store Deal</div>
+									</div>
+								{{/if}}
+							{{/if}}
+							{{/each}}
+						</div>
+						{{#inArray (pluck breadcrumbs 'name') 'Furniture'}}
+					    {{else}}
+						<div class="store-deal-container">	
+							{{#if stock_level}}
+								{{#gt stock_level 7}}
+									<div class="red-ribbon in-stock">In Stock</div>
+								{{/gt}} 
+								{{#if stock_level ">=" "4"}}
+									{{#lte stock_level 6}}
+										<div class="red-ribbon available-to-order">Low Stock</div>
+									{{/lte}}
+								{{/if}}
+								{{#lte stock_level 3}}
+									<div class="red-ribbon on-order">Out of Stock</div>
+								{{/lte}}
+							{{else}}
+	                            {{#if out_of_stock_message }}
+	                                  <div class="red-ribbon on-order">Out of Stock</div>
+	                            {{/if}}
+							{{/if}}
+						</div>
+						{{/inArray}}
+						{{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+						{{#if price}}
+						<div class="listItem-price">{{> components/products/price price=price is_category=true}}</div>
+						{{/if}}
+						{{#if show_cart_action}}
+							{{#if has_options}}
+							<a href="{{url}}" {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}} class="button button--small" data-product-id="{{id}}" style="white-space: nowrap;">{{lang 'products.choose_options'}}</a>
+							{{/if}}
+							<!-- {{#if pre_order}}
+							<a href="{{pre_order_add_to_cart_url}}" data-event-type="product-click" class="button button--small">{{lang 'products.pre_order'}}</a>
+							{{/if}} -->
+							{{#if add_to_cart_url }}
+							<a href="{{add_to_cart_url}}" {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}} class="button button--small">{{lang 'products.add_to_cart'}}</a>
+							{{/if}}
+							{{#if out_of_stock_message }}
+								<a href="{{url}}" data-event-type="product-click" class="button button--small" data-product-id="{{id}}">{{out_of_stock_message}}</a>
+							{{/if}}
+							{{#each custom_fields }}
+								{{#if name '==='  'Rebate IDs' }}
+								<a href="{{../../url}}#rebate" {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}} class="button button--small sub-button" style="color: #f00;background-color: #fde8e8;border:none;">{{lang 'products.check_rebate_available'}}</a>
+								{{/if}}
+							{{/each}}
+						{{else}}
+							<a href="{{add_to_wishlist_url}}" {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}} class="button button--small sub-button" style="color: #f00;background-color: #fde8e8;border:none;">{{lang 'products.wishlist'}}</a>
+						{{/if}}
+						{{else}}
+						{{> components/common/login-for-pricing}}SSSSSS
+						{{/or}}
+						{{#if show_compare}}
+						<label class="button button--small xx" for="compare-{{id}}" style="padding:0 !important;">
+							<div style="display:flex;justify-content: center;align-items:center;">
+								<input class="cmp" type="checkbox" name="products[]" value="{{id}}" id="compare-{{id}}" data-compare-id="{{id}}" style="margin-right:2%;margin-top:0px;height:0">
+								<img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/compare-icon.png?t=1624248002&_ga=2.94277407.308044551.1624238785-624579995.1618214792" alt="compare icon" width="15" style="margin-left:3%;">
+								<span style="white-space: nowrap;margin-left:7%;">{{lang "ADD TO COMPARE"}}</span>
+							</div>
+						</label>
+						{{/if}}
+					</div>
+				</div>
+			{{/gt}}
+			{{/if}}
+		<!-- </div> -->
+	<!-- </div> -->
+<!-- </article> -->

@@ -1,0 +1,156 @@
+<div class="form-field" data-product-attribute="product-list">
+    <label class="form-label form-label--alternate form-label--inlineSmall">
+        {{display_name}}:
+        <span data-option-value></span>
+
+        {{#if required}}
+            <small>{{lang 'common.required'}}</small>
+        {{/if}}
+    </label>
+
+    {{#if values.0.image}}
+        <ul class="productOptions-list">
+            {{#unless required}}
+                <li class="productOptions-list-item">
+                    <input class="form-radio"
+                           type="radio"
+                           name="attribute[{{id}}]"
+                           value="0"
+                           shitty_data="{{data}}"
+                           id="attribute_productlist_0_{{id}}"
+                           checked="{{#if defaultValue '==' 0}}checked{{/if}}" required>
+                    <label class="form-label" for="attribute_productlist_0_{{id}}">{{lang 'products.none'}}</label>
+                </li>
+            {{/unless}}
+            {{#each values}}
+                <li class="productOptions-list-item" data-product-attribute-value="{{id}}">
+                    {{#if image}}
+                        <figure class="productOptions-list-item-figure">
+                            {{> components/common/responsive-img
+                                image=image
+                                class="productOptions-list-item-image"
+                                lazyload='lazyload+lqip'
+                            }}
+                        </figure>
+                    {{/if}}
+                    <div class="productOptions-list-item-content">
+                        <input
+                            class="form-radio"
+                            type="radio"
+                            name="attribute[{{../id}}]"
+                            value="{{id}}"
+                            shitty_data="{{data}}"
+                            id="attribute_productlist_{{../id}}_{{id}}"
+                            {{#if selected}}
+                                checked
+                                data-default
+                            {{/if}}
+                            {{#if ../required}}required{{/if}}>
+                        <label data-product-attribute-value="{{id}}" class="form-label" for="attribute_productlist_{{../id}}_{{id}}">{{label}}</label>
+                    </div>
+                </li>
+            {{/each}}
+        </ul>
+    {{else}}
+        {{#unless required}}
+        <input class="form-radio"
+               type="radio"
+               name="attribute[{{id}}]"
+               value="0"
+               shitty_data="{{data}}"
+               id="attribute_productlist_0_{{id}}"
+               {{#if defaultValue '==' 0}}checked{{/if}}>
+        <label class="form-label" for="attribute_productlist_0_{{id}}">{{lang 'products.none'}}</label>
+        {{/unless}}
+        {{#each values}}
+            <input
+                class="form-radio"
+                type="radio"
+                name="attribute[{{../id}}]"
+                value="{{id}}"
+                shitty_data="{{data}}"
+                id="attribute_productlist_{{../id}}_{{id}}"
+                {{#if selected}}checked{{/if}}
+                {{#if ../required}}required{{/if}}>
+            <label data-product-attribute-value="{{id}}" class="form-label" for="attribute_productlist_{{../id}}_{{id}}">{{label}}</label>
+        {{/each}}
+    {{/if}}
+</div>
+{{#if display_name '==' 'Performance Guarantee Details'}}
+<span id="lrnmore-btn"><i id="actm"></i><i class="fa fa-info-circle" style="margin-right:5px;"></i>Learn More</span>
+<script>
+    var html = "";
+    html += `<div class='container-pg-custom'>
+            <div class="abs-pg">
+                <div class="cls-btn"><i class="fa fa-close"></i></div>
+                <span>Kings Performance Guarantee</span>
+                <p>
+                    One of the great benefits of shopping locally with King's
+                    Great Buys Plus is access to our
+                    Performance Guarantee, and we here at King's strongly recommend all of our
+                    customers take advantage of this exceptional opportunity! King's
+                    Performance Guarantee will completely cover your purchase up to a full five years.
+                    With a single service call, the Performance Guarantee pays for
+                    itself. If you have any issues, you call us here at the store and speak to a real person
+                    in your area (not a distant exotic land). We will send our own trained technicians to fix the problem
+                    , and the best part is, if we can't fix it- we replace it for <b>free!</b>
+                    
+                </p>	
+                <span seemorebtn id="seeless"><span seeless>See More</span> <i id="chev" class="fa fa-chevron-down"></i></span>
+                <p class="content-less">
+                    For just pennies a day, King's is offering peace of 
+                    mind that you'll never have to worry about your
+                    purchase doing its job! You can have peace of mind knowing that
+                    your purchase is backed guaranteed by King's established 40-year
+                    reputation within your own community. In the unlikely event that your purchase does
+                    not perform, and we cannot fix it,
+                    King's will replace it for free! If your model is not available, we will upgrade you to a better model.
+                    While everything King's sells comes with a limited one-year manufacturer's warranty, King's
+                    Performance Guarantee will cover EVERYTHING for up to a full five years! If your fridge goes out, this guarantee
+                    will cover the cost of the lost food with <i class="italic">Fresh Food Reimbursement*.</i> If your washing machine or dryer go out,
+                    this guarantee will cover the cost of trips to the laundry mat with Laundry <i class="italic">Mat Reimbursement*.</i>
+
+                </p>
+                <p class="content-less">
+                    With all these benefits, you can't afford to not cover
+                    your purchase! <a id="seeless" href="/kings-extended-performance-guarantee/">Learn More <i class="fa fa-chevron-down"></i></a>
+                </p>
+            </div>		
+        </div>`;
+    $('.productview-options-dynamic .form-field').last().append(html);
+    $('.productview-options-dynamic .form-field').last().css('position','relative');
+      $('p.content-less').fadeOut();
+    $('[seemorebtn]').click(function(){
+        
+        if($("#chev").hasClass("fa-chevron-down")){
+            $("#chev").removeClass("fa-chevron-down");
+            $("#chev").addClass("fa-chevron-up");
+            $('p.content-less').fadeIn();
+            $(".container-pg-custom").animate({
+                top: '-157px'
+          
+            });
+            $('[seeless]').text("See Less");
+        }else{
+            $("#chev").addClass("fa-chevron-down");
+            $("#chev").removeClass("fa-chevron-up");
+            $('p.content-less').fadeOut();
+            $(".container-pg-custom").animate({
+                top: '-20px'
+
+            });
+            $('[seeless]').text("See More");
+        }
+    });
+
+    $("#lrnmore-btn").click(function(){
+        $('.container-pg-custom').fadeIn();
+        $('#actm').fadeIn();
+    });
+    $('.cls-btn').click(function(){
+        $('.container-pg-custom').fadeOut();
+        $('#actm').fadeOut();
+    });
+</script>
+
+{{/if}}

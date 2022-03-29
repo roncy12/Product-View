@@ -1,0 +1,63 @@
+<style>
+    .container-popup-checkout{
+        width:100%;
+        position:relative;
+        background-color:#666666;
+        right:-100%;
+        opacity: 0;
+        padding:13px;display:flex;
+        justify-content: center;
+        align-items: center;
+       
+    }
+    .image-container-popup{
+        width:10%;
+    }
+    .container-delivery-popup-blurb{
+        width:90%;
+        padding-left:17px;
+    }
+    .container-delivery-popup-blurb p i{
+        color:#d22229;
+    }
+    .container-delivery-popup-blurb p{
+        margin:0;
+        color:white;
+    }
+</style>
+<script>
+$(document).ready(function(){
+
+
+    var checkExist = setInterval(function() {
+        if ($('span[data-test="cart-price-value"]').length) {
+            var html=`
+            <div class="container-popup-checkout">
+                <div class="image-container-popup">
+                    <img class="lazyload" src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/truck-icon-delivery.png?t=1643342227&_gl=1*j961sn*_ga*MTY3NzY3MzYuMTYzNDgwNDgwOA..*_ga_WS2VZYPC6G*MTY0Mzc2Mjc3NC4yMy4xLjE2NDM3NjI4NTIuNDI." />
+                </div>
+                <div class="container-delivery-popup-blurb">
+                    <p>
+                        <i class="fa fa-info-circle"></i>
+                        Local delivery generally available within a few days. We will call you to set your delivery
+                        within 24-hours of your purchase.
+                    </p>
+                </div>
+            </div>
+            `;
+            $('.layout-cart').append(html);
+            setTimeout(function(){
+                $('.container-popup-checkout').animate({'right':'0px','opacity':'1'},1000,function(){
+                    setTimeout(function(){
+                        $('.container-popup-checkout').animate({'right':'-200%','opacity': '0'},500);
+                    },8000);
+                });
+            },1000);
+            clearInterval(checkExist);
+        }
+    }, 100); // check every 100ms
+
+
+
+});
+</script>

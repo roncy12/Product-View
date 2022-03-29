@@ -1,0 +1,84 @@
+<nav class="navPages">
+    <div class="navPages-quickSearch">
+        {{> components/common/quick-search}}
+    </div>
+    
+    <ul id="myUL" class="navPages-list{{#if theme_settings.navigation_design '!==' 'simple'}} navPages-list-depth-max{{/if}}">
+        {{#each categories}}
+            {{#all (if name '!==' 'Rebates') (if name '!==' 'Appliances') (if name '!==' 'Giftcard') (if name '!==' 'Refrigerator Accessories') (if name '!==' 'LG Promotion') (if name '!==' 'LG 2 Promotion') (if name '!==' 'SAMSUNG Promotion') (if name '!==' 'BEKO Promotion')(if name '!==' 'BEKO 2 Promotion') (if name '!==' 'WHIRLPOOL Promotion')(if name '!==' 'Big Game Sale')}}
+            <li class="navPages-item">
+                {{#if ../../theme_settings.navigation_design '===' 'simple'}}
+                    {{> components/common/navigation-list-new}}
+                {{/if}}
+                {{#if ../../theme_settings.navigation_design '===' 'alternate'}}
+                    {{> components/common/navigation-list-alternate}}
+                {{/if}}
+             </li>
+            {{/all}}
+        {{/each}}
+        
+            <li class="navPages-item">
+                <a class="navPages-action {{#if is_active}} activePage{{/if}}" href="/brands/" style="white-space:nowrap;">
+                    <!-- <img class="nav-image" src="{{getImage (cdn 'img/homepage/Brands.png')}}"  /> -->
+                   <span style="white-space:nowrap">Brands</span>
+                
+                </a>
+            </li>
+            <li class="navPages-item">
+                <a href="/deal-match/" class="navPages-action {{#if is_active}} activePage{{/if}}" style="white-space:nowrap;">
+                    <!-- <img class="nav-image" src="{{getImage (cdn 'img/homepage/deal-match.png')}}"  /> -->
+                    <span style="white-space: nowrap;">Deal Match</span>
+                </a>
+            </li>
+            <li class="navPages-item">
+                <a href="/online-only-deals/" class="navPages-action {{#if is_active}} activePage{{/if}}" style="white-space:nowrap;">
+                    <!-- <img class="nav-image" src="{{getImage (cdn 'img/homepage/deal-match.png')}}"  /> -->
+                    <span style="white-space: nowrap;color:#004eaa;">Online Only Deals</span>
+                </a>
+            </li>
+    </ul>
+</nav>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+
+$(document).ready(function(){
+    var slick_option = {
+        "dots": false,
+        "mobileFirst": true,
+        "slidesToShow": 5,
+        "slidesToScroll": 5,
+        "autoplay": false,
+		"infinite": false
+    };
+
+	$('.gg').each(function(){
+		$(this).not('.slick-initialized').slick(slick_option);
+	});
+
+    $('.navPages-action.has-subMenu').on('hover click mousemove' , function(){
+    	var _slickContainer = $(this).parent().find('.gg');
+    	if( _slickContainer.length > 0){
+            _slickContainer[0].slick.refresh();	 
+    	}
+    });
+
+    $(window).on('resize orientationchange', function() {
+        $('.gg').slick('resize');
+    });
+
+});
+
+//delete element if  innerhtml of navpage is empty
+/*    var elem = document.getElementsByClassName('navPages-item');
+    for(let i = 0; i<=elem.length;i++){
+        var htmlstring = elem[i].innerHTML;
+        htmlstring = (htmlstring.trim) ? htmlstring.trim() : htmlstring.replace(/^\s+/,'');
+        if(htmlstring == ''){
+            elem[i].remove();
+        }
+    }
+*/	
+</script>

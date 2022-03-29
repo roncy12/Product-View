@@ -1,0 +1,66 @@
+<style>
+         .promotion-product-container{
+                  width:60% !important;
+                  margin: 0 auto !important;
+         }
+         @media only screen and (max-width:450px){
+                  .promotion-product-container{
+                           width:100% !important;
+                           margin:0 !important;
+                  }
+         }
+</style>
+
+{{#partial "page"}}
+<div class="container-promote">
+         <div class="banner-samsung">
+               <img class="lazyload" src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/lg-promotion-banner-washtower-1-.png?t=1634258942&_gl=1*1thtq5l*_ga*NjI0NTc5OTk1LjE2MTgyMTQ3OTI.*_ga_WS2VZYPC6G*MTYzNDI1ODc2Ni4yMTIuMS4xNjM0MjU4ODA5LjE3" alt="">
+         </div>
+         <div class="blurb-title" style="margin-top:80px;">
+                  <h2>LG WashTower Package</h2>
+                  <span>Get up to 10% back when you bundle with 2+ eligible appliances</span>
+         </div>
+         <div class="promotion-product-container">
+                  
+                           <div class="content-tab">
+                                    {{> components/page/home/product-with-price skus="WKE100HWA" }}
+                           </div>
+                           <div class="content-tab">
+                                    {{> components/page/home/product-with-price skus="WKEX200HBA" }}
+                           </div>
+         
+         </div>
+
+
+</div>
+
+{{/partial}}
+{{> layout/home-base}}
+
+
+<script>
+         $(document).ready(function(){
+                      $('.tab-content').each(function(){
+                             var id = $(this).attr('id');
+                             var trim_id = id.substr(4);
+                             var x = $(this).find('.content-tab').text().trim().length;
+                             $('.tab-title').each(function(){
+                                    var href = $(this).attr("href").substr(5);
+                                    if(href == trim_id){
+                                           if(x == 0 ){
+                                               $(this).parent().remove();
+                                           }
+                                    }
+                             });
+  
+                           
+                       });
+  
+                $('.product-slot').filter(function(){
+                          return $(this).text().trim().length == 0;
+                }).remove();
+         });
+  
+        
+  
+  </script>

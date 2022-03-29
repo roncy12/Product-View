@@ -1,0 +1,66 @@
+---
+product:
+    videos:
+        limit: {{theme_settings.productpage_videos_count}}
+    reviews:
+        limit: {{theme_settings.productpage_reviews_count}}
+    related_products:
+        limit: {{theme_settings.productpage_related_products_count}}
+    similar_by_views:
+        limit: {{theme_settings.productpage_similar_by_views_count}}
+---
+{{#partial "page"}}
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+    {{#each product.shipping_messages}}
+        {{> components/common/alert-info message}}
+    {{/each}}
+
+    <div itemscope itemtype="http://schema.org/Product">
+        {{> components/products/product-view schema=true  }}
+        <div id="flix-inpage"></div>
+        {{{region name="product_below_content"}}}
+
+        {{#if product.videos.list.length}}
+            {{> components/products/videos product.videos}}
+        {{/if}}
+
+        {{#all settings.show_product_reviews (if theme_settings.show_product_reviews_tabs '!==' true)}}
+            {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
+        {{/all}}
+
+        {{> components/products/tabs}}
+
+        {{#each (limit product.custom_fields 4)}}
+        <li class="bottom-space-20"><strong>{{name}}:</strong>	{{value}}</li>
+        {{/each}}
+    </div>
+{{/partial}}
+{{> layout/product-base}}
+
+<script>
+    //remove Other Color(s) wording in main product page if no other color
+
+   if( $('.color-option-container .option-container-flex').children().length > 0 ){
+        //no children
+    }else{
+        $('.color-option-container').remove();
+    }
+    
+
+</script>
+
+
+
+<script type="text/javascript" src="//media.flixfacts.com/js/loader.js"
+data-flix-distributor="17923"
+data-flix-language="us"
+data-flix-brand=""
+data-flix-mpn="{{product.sku}}"
+data-flix-ean=""
+data-flix-sku=""
+data-flix-button="flix-minisite"
+data-flix-inpage="flix-inpage"
+data-flix-button-image=""
+data-flix-price=""
+data-flix-fallback-language="" async></script>

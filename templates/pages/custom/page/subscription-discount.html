@@ -1,0 +1,140 @@
+{{#partial "page"}}
+<style>
+         .body{
+                  margin-top:0;
+                  margin-bottom:0;
+         }
+         .body .container:first-child{
+                  padding:0;
+                  margin:0;
+                  max-width:100%;
+         }
+         .newsletter-home-section{
+                  display:none;
+         }
+</style>
+<div class="banner-subscription-discount">
+         <img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/online-only-banner.png?t=1639098938s" alt="" class="lazyload">
+</div>
+<div class="row-subscribe-email">
+         <span class="blurb-email">
+                  Subscribe to King's newsletter and gain exclusive access to offers,<br>
+                  discounts, and other amazing deals -- like this one!       
+         </span>
+         <form class="form xf" action="{{urls.subscribe.action}}" method="post">
+                  <fieldset class="form-fieldset">
+                  <input type="hidden" name="action" value="subscribe">
+                  <input type="hidden" name="nl_first_name" value="bc">
+                  <input type="hidden" name="check" value="1">
+                  <div class="form-field-custom">
+                           <div class="form-prefixPostfix wrap">
+                                    <input class="form-input" id="nl_email" name="nl_email" type="email" value="{{customer.email}}" placeholder="Enter Your Email Address">
+                                    <input class="button button--primary form-prefixPostfix-button--postfix" type="submit" value="{{lang 'newsletter.subscribe_submit'}}">
+                           </div>
+                           {{#if settings.show_newsletter_summary }}
+                                    <div class="footer-newsletter-summary">{{settings.newsletter_summary}}</div>
+                           {{/if}}
+                  </div>
+                  </fieldset>
+         </form>
+</div>
+<div class="how-does-work">
+         <span id="span-work">
+                  So How Does It Work?
+         </span>
+
+         <div class="row-subs">
+                  <div class="col-subs">
+                           <img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/01.png?t=1639103672" alt="" class="lazyload">
+                           <div class="col-subs-blurb">
+                                    <p>Subscribe to our newsletter and<br> receive a $25 off coupon code.</p>
+                           </div>
+                  </div>
+                  <div class="col-subs">
+                           <img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/02.png?t=1639103672" alt="" class="lazyload">
+                           <div class="col-subs-blurb">
+                                    <p>This coupon code can be used for the <br>
+                                    following items:<br>
+                                        <span>
+                                        <a target="_blank" href="https://kingsgreatbuys.com/electronics/tv-video/?_bc_fsnf=1&brand=42&sort=alphaasc">Any Samsung TV 65"</a> or above<br>
+                                         <a target="_blank" href="https://kingsgreatbuys.com/bedding">Any mattress</a> and <a target="_blank" href="https://kingsgreatbuys.com/bedding/foundation">foundation</a> combo<br>
+                                         purchase.
+                                        </span>
+                                    </p>
+                           </div>
+                  </div>
+                  <div class="col-subs">
+                           <img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/03.png?t=1639103672" alt="" class="lazyload">
+                           <div class="col-subs-blurb">
+                                    <p>Coupon code CAN be combined with<br> other King's offers. Just enter the<br>
+                                    code on checkout.
+                                    </p>
+                           </div>
+                  </div>
+                  <div class="col-subs">
+                           <img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/04.png?t=1639103672" alt="" class="lazyload">
+                           <div class="col-subs-blurb">
+                                    <p>Promo ends December 10,2021, and <br> can be used for online purchases only.</p>
+                           </div>
+                  </div>
+         </div>
+</div>
+<div class="touch">
+         <span id="title-touch">
+                  Stay in Touch and Save $25 on these Amazing Items!
+         </span>
+         <div class="touch-row">
+                  <div class="touch-col">
+                           <img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/samsung-smarttv.png?t=1639104751" alt="" class="lazyload">
+                           <div class="touch-burb">
+                                 <span class="title-touch-blurb">
+                                          Samsung Smart TVs
+                                 </span>     
+                           <p class="p-touch">
+                                    Learn why Samsung has been an industry leader for nearly a<br>
+                                    decade with cutting-edge technology and top of the class picture<br>
+                                    quality. See the difference of Samsung TVs, and live in a world<br>
+                                    full of vivid colors and crystal-clear imagery.
+                           </p>       
+                           </div>
+                  
+                  </div>
+                  <div class="touch-col">
+                           <img src="https://cdn11.bigcommerce.com/s-bek4r4rsz5/product_images/uploaded_images/kings-mattress-foundation.png?t=1639104754" alt="" class="lazyload">
+                           <div class="touch-burb">
+                                    <span class="title-touch-blurb">
+                                            King's Mattresses and Foundations
+                                    </span>
+                                   <p class="p-touch">
+                                    Experience top-notch comfort and full-body support with King's<br>
+                                    recommended mattresses and foundations. Never again<br>
+                                    succumb to interrupted sleep, and say hello to invigorating sleep<br>
+                                    and well-rested mornings.
+                                   </p>
+                           </div>
+                  </div>
+         </div>
+</div>
+<div class="footer-container-cta">
+         <div class="footer-cta">
+                  <span id="cta-label">SIGN UP NOW!</span>
+                  <form class="form xf" action="{{urls.subscribe.action}}" method="post">
+                           <fieldset class="form-fieldset">
+                           <input type="hidden" name="action" value="subscribe">
+                           <input type="hidden" name="nl_first_name" value="bc">
+                           <input type="hidden" name="check" value="1">
+                           <div class="form-field-custom">
+                                    <div class="form-prefixPostfix wrap">
+                                             <input class="form-input" id="nl_email" name="nl_email" type="email" value="{{customer.email}}" placeholder="Enter Your Email Address">
+                                             <input class="button button--primary form-prefixPostfix-button--postfix" type="submit" value="YES, GET MY $25 OFF">
+                                    </div>
+                                    {{#if settings.show_newsletter_summary }}
+                                             <div class="footer-newsletter-summary">{{settings.newsletter_summary}}</div>
+                                    {{/if}}
+                           </div>
+                           </fieldset>
+                  </form>
+         </div>
+</div>
+{{/partial}}
+{{>layout/base}}

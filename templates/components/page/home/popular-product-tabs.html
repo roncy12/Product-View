@@ -1,0 +1,131 @@
+<div class="popular-products-container">
+         <h1>Popular Products</h1>
+<ul class="tabs" data-tab>
+       <li class="tab  is-active">
+              <a href="#tab-Refrigerators" class="tab-title" >REFRIGERATOR</a>
+       </li>
+       <li class="tab">
+              <a href="#tab-Cooking" class="tab-title" >COOKING</a>
+       </li>
+
+       <li class="tab" >
+              <a href="#tab-Dishwashers" class="tab-title">DISHWASHER</a>
+       </li>
+       <li class="tab">
+              <a href="#tab-Laundry" class="tab-title">LAUNDRY</a>
+       </li>
+       <li class="tab">
+              <a href="#tab-Bedding" class="tab-title">BEDDING</a>
+       </li>
+       <li class="tab">
+              <a href="#tab-Electronics" class="tab-title">ELECTRONICS</a>
+       </li>
+       <li class="tab" >
+              <a href="#tab-Furniture" class="tab-title">FURNITURE</a>
+       </li>
+       <li class="tab">
+              <a href="#tab-Rebates" class="tab-title">REBATES</a>
+       </li>
+
+ </ul>
+     <div class="tabs-contents">
+              <div class="tab-content  is-active" id="tab-Refrigerators">
+                     <div class="content-tab">
+                            {{> components/page/home/popular-product-price category_namez="Refrigerators" products=products}}                       
+                     </div>
+              </div> 
+       
+              <div class="tab-content" id="tab-Cooking">
+                        <div class="content-tab">
+                               {{> components/page/home/popular-product-price category_namez="Cooking" products=products}}                       
+                        </div>
+              </div>
+              <div class="tab-content" id="tab-Dishwashers">
+                     <div class="content-tab">
+ 
+                      {{> components/page/home/popular-product-price category_namez="Dishwashers" products=products}}  
+
+                           
+                     </div>                   
+              </div>      
+              <div class="tab-content" id="tab-Laundry">
+                     <div class="content-tab">                  
+                      {{> components/page/home/popular-product-price category_namez="Laundry" products=products}}  
+                     </div>                                  
+              </div>  
+              <div class="tab-content" id="tab-Bedding">
+                     <div class="content-tab">
+                            {{> components/page/home/popular-product-price category_namez="Bedding" products=products}}         
+                     </div>                                
+              </div>
+              <div class="tab-content" id="tab-Electronics">
+                     <div class="content-tab">
+
+                            {{> components/page/home/popular-product-price category_namez="Electronics" products=products}}       
+                                          
+                     </div>                                 
+              </div>
+              <div class="tab-content" id="tab-Furniture">
+                     <div class="content-tab">
+                            {{> components/page/home/popular-product-price category_namez="Furniture" products=products}}                        
+                     </div>                                    
+              </div>
+              <div class="tab-content" id="tab-Rebates">
+                     <div class="content-tab">
+  
+                            {{> components/page/home/popular-product-price category_namez="Rebates" products=products}}                         
+                      </div>                                
+              </div>  
+                    
+                  
+     </div>
+</div>
+
+<script>
+       $(document).ready(function(){
+              //   remove duplicate tabs
+              //    var seen = {};
+              //    $('li.tab').each(function() {
+              //    var txt = $(this).attr('data-id');
+              //    if (seen[txt])
+              //    $(this).remove();
+              //    else
+              //    seen[txt] = true;
+              //    });     
+                //remove duplicate content
+              //    var same = {};
+              //    $('.product-slot').each(function() {
+              //    var txt = $(this).attr('data-ids');
+              //    if (same[txt])
+              //    $(this).remove();
+              //    else
+              //    same[txt] = true;
+              //    });     
+
+              //    remove element of empty  innerText or blank
+
+
+                    $('.tab-content').each(function(){
+                           var id = $(this).attr('id');
+                           var trim_id = id.substr(4);
+                           var x = $(this).find('.content-tab').text().trim().length;
+                           $('.tab-title').each(function(){
+                                  var href = $(this).attr("href").substr(5);
+                                  if(href == trim_id){
+                                         if(x == 0 ){
+                                             $(this).parent().remove();
+                                         }
+                                  }
+                           });
+
+                         
+                     });
+
+              $('.product-slot').filter(function(){
+                        return $(this).text().trim().length == 0;
+              }).remove();
+       });
+
+      
+
+</script>
